@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
-import logo from "../../public/logo.jpeg"; // عدل المسار حسب مكان الصورة
+import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
+import logo from "../../public/logo.jpeg";
 
-function Login() {
+function Register() {
+
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const [values, setValues] = useState({
+    username: "",
     email: "",
     password: "",
   });
@@ -19,21 +21,22 @@ function Login() {
   const validate = () => {
     const newErrors = {};
 
-    if (!values.email.includes("@"))
-      newErrors.email = "البريد الإلكتروني غير صالح";
+    if (!values.username.trim())
+      newErrors.username = "Username مطلوب";
 
-    if (!values.password.trim())
-      newErrors.password = "كلمة المرور مطلوبة";
+    if (!values.email.includes("@"))
+      newErrors.email = "Email غير صحيح";
+
+    if (values.password.length < 6)
+      newErrors.password = "Password لازم 6 حروف على الأقل";
 
     return newErrors;
   };
 
-  // change inputs
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  // submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -41,7 +44,8 @@ function Login() {
     setErrors(err);
 
     if (Object.keys(err).length === 0) {
-      navigate("/symptoms");
+      console.log(values);
+      navigate("/");
     }
   };
 
@@ -52,13 +56,39 @@ function Login() {
 
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <img src={logo} alt="logo" className="w-20 mb-2" />
+          <img src={logo} className="w-20 mb-2" />
           <h1 className="text-xl font-semibold text-blue-600">
             Stomach Support
           </h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          {/* Username */}
+          <div>
+            <div className="relative">
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+
+              <input
+                type="text"
+                name="username"
+                placeholder="Enter Your Username"
+                value={values.username}
+                onChange={handleChange}
+                className={`w-full pl-12 py-3 rounded-xl bg-gray-100 outline-none border ${
+                  errors.username
+                    ? "border-red-500"
+                    : "border-gray-200 focus:border-blue-500"
+                }`}
+              />
+            </div>
+
+            {errors.username && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.username}
+              </p>
+            )}
+          </div>
 
           {/* Email */}
           <div>
@@ -94,7 +124,7 @@ function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="Enter Your Password"
+                placeholder="Enter Your password"
                 value={values.password}
                 onChange={handleChange}
                 className={`w-full pl-12 pr-12 py-3 rounded-xl bg-gray-100 outline-none border ${
@@ -120,43 +150,19 @@ function Login() {
             )}
           </div>
 
-          {/* Login Button */}
+          {/* Register Button */}
           <button
             type="submit"
             className="w-full py-3 bg-blue-500 text-white rounded-full font-semibold text-lg hover:bg-blue-600 transition"
           >
-            Login
+            Register
           </button>
 
-          {/* Forgot */}
-          <p className="text-center text-sm text-gray-400 cursor-pointer">
-            ?Forgot password
-          </p>
-
-          {/* Divider */}
-          <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-gray-300"></div>
-            <span className="text-gray-400 text-sm">Or</span>
-            <div className="flex-1 h-px bg-gray-300"></div>
-          </div>
-
-          {/* Google */}
-          <button
-            type="button"
-            className="w-full border rounded-full py-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition"
-          >
-            <img
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
-              className="w-5"
-            />
-            Sign in with Google
-          </button>
-
-          {/* Register */}
-          <p className="text-center text-sm text-gray-500">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-blue-500 font-semibold">
-              Register
+          {/* Login Link */}
+          <p className="text-center text-sm text-gray-600">
+            Already have an account?{" "}
+            <Link to="/" className="text-blue-500 font-semibold">
+              Login
             </Link>
           </p>
 
@@ -166,4 +172,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

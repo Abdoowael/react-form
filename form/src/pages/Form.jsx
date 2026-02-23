@@ -21,11 +21,11 @@ function Form() {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  // Validation Function
+  
   const validate = () => {
     let newErrors = {};
 
-    // ❌ NAME VALIDATION → Block numbers
+    
     if (!values.name.trim()) {
       newErrors.name = "Name is required";
     } else if (/\d/.test(values.name)) {
