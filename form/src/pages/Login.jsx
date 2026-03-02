@@ -41,7 +41,7 @@ function Login() {
     setErrors(err);
 
     if (Object.keys(err).length === 0) {
-      navigate("/symptoms");
+      navigate("/step1");
     }
   };
 
@@ -71,11 +71,10 @@ function Login() {
                 placeholder="Enter Your Email"
                 value={values.email}
                 onChange={handleChange}
-                className={`w-full pl-12 py-3 rounded-xl bg-gray-100 outline-none border ${
-                  errors.email
+                className={`w-full pl-12 py-3 rounded-xl bg-gray-100 outline-none border ${errors.email
                     ? "border-red-500"
                     : "border-gray-200 focus:border-blue-500"
-                }`}
+                  }`}
               />
             </div>
 
@@ -97,11 +96,10 @@ function Login() {
                 placeholder="Enter Your Password"
                 value={values.password}
                 onChange={handleChange}
-                className={`w-full pl-12 pr-12 py-3 rounded-xl bg-gray-100 outline-none border ${
-                  errors.password
+                className={`w-full pl-12 pr-12 py-3 rounded-xl bg-gray-100 outline-none border ${errors.password
                     ? "border-red-500"
                     : "border-gray-200 focus:border-blue-500"
-                }`}
+                  }`}
               />
 
               <button

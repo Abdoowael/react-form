@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Welcome from "./pages/Welcome";
-import Hello from "./pages/Hello";
-import Symptoms from "./pages/Symptoms";
-import Analysis from "./pages/Analysis";
+
+// New Flow
+import Step1Welcome from "./pages/Step1Welcome";
+import Step2Symptoms from "./pages/Step2Symptoms";
+import Step3Conditions from "./pages/Step3Conditions";
+import Step4Result from "./pages/Step4Result";
+import Step5Details from "./pages/Step5Details";
 
 function App() {
   return (
@@ -13,11 +16,17 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/welcome" element={<Welcome />} />
-        <Route path="/hello" element={<Hello />} />
-        <Route path="/symptoms" element={<Symptoms />} />
-        <Route path="/analysis" element={<Analysis />} />
+
+        {/* New 5-Step Flow */}
+        <Route path="/step1" element={<Step1Welcome />} />
+        <Route path="/step2" element={<Step2Symptoms />} />
+        <Route path="/step3" element={<Step3Conditions />} />
+        <Route path="/step4" element={<Step4Result />} />
+        <Route path="/step5" element={<Step5Details />} />
+
+        {/* Catch-all redirect */}
         <Route path="/form" element={<Navigate to="/register" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
