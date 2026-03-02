@@ -11,22 +11,28 @@ function Step4Result() {
     const percentage = condition.match || 0;
     const score = (percentage * 0.207).toFixed(1);
 
+    const size = 256;
+    const strokeWidth = 18;
+    const radius = (size - strokeWidth) / 2;
+    const circumference = radius * 2 * Math.PI;
+    const offset = circumference - (percentage / 100) * circumference;
+
     let severityLabel = "منخفضة";
     let severityColor = "bg-green-500";
-    let circleColor = "border-green-500";
+    let strokeColor = "#22c55e";
     let textColor = "text-green-500";
     let shadowColor = "shadow-green-500/20";
 
     if (percentage >= 75) {
         severityLabel = "عالية";
         severityColor = "bg-[#f05349]"; // Match screenshot exact red
-        circleColor = "border-[#f05349]";
+        strokeColor = "#f05349";
         textColor = "text-[#f05349]";
         shadowColor = "shadow-red-500/20";
     } else if (percentage >= 40) {
         severityLabel = "متوسطة";
         severityColor = "bg-orange-500";
-        circleColor = "border-orange-500";
+        strokeColor = "#f97316";
         textColor = "text-orange-500";
         shadowColor = "shadow-orange-500/20";
     }
@@ -50,9 +56,33 @@ function Step4Result() {
                 <div className="bg-gradient-to-b from-[#fce4e4] to-[#fcf0f0] pt-10 pb-16 flex flex-col items-center">
                     <h2 className="text-3xl items-center font-bold text-gray-800 mb-8 px-4 text-center">{condition.name}</h2>
 
-                    <div className={`relative w-64 h-64 rounded-full border-[18px] ${circleColor} flex flex-col items-center justify-center bg-transparent drop-shadow-sm`}>
-                        <span className={`text-6xl font-bold tracking-tighter ${textColor}`}>{percentage}%</span>
-                        <span className="text-gray-500 mt-2 font-medium text-lg">النتيجة: {score}</span>
+                    <div className="relative w-64 h-64 flex flex-col items-center justify-center drop-shadow-sm">
+                        <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+                            <circle
+                                cx="128"
+                                cy="128"
+                                r={radius}
+                                stroke="#f3f4f6"
+                                strokeWidth={strokeWidth}
+                                fill="transparent"
+                            />
+                            <circle
+                                cx="128"
+                                cy="128"
+                                r={radius}
+                                stroke={strokeColor}
+                                strokeWidth={strokeWidth}
+                                fill="transparent"
+                                strokeDasharray={circumference}
+                                strokeDashoffset={offset}
+                                strokeLinecap="round"
+                                className="transition-all duration-1000 ease-out"
+                            />
+                        </svg>
+                        <div className="relative z-10 flex flex-col items-center justify-center mt-2">
+                            <span className={`text-6xl font-bold tracking-tighter ${textColor}`}>{percentage}%</span>
+                            <span className="text-gray-500 mt-1 font-medium text-lg">النتيجة: {score}</span>
+                        </div>
                     </div>
 
                     <div className={`mt-8 px-12 py-3 ${severityColor} text-white rounded-[2rem] font-bold text-xl shadow-lg ${shadowColor}`}>
