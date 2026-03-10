@@ -9,6 +9,14 @@ import Step3Conditions from "./pages/Step3Conditions";
 import Step4Result from "./pages/Step4Result";
 import Step5Details from "./pages/Step5Details";
 
+// Doctor Flow
+import DoctorHome from "./pages/DoctorHome";
+import DoctorList from "./pages/DoctorList";
+import DoctorProfile from "./pages/DoctorProfile";
+import BookAppointment from "./pages/BookAppointment";
+import ChatList from "./pages/ChatList";
+import AudioCall from "./pages/AudioCall";
+
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +31,14 @@ function App() {
         <Route path="/step3" element={<Step3Conditions />} />
         <Route path="/step4" element={<Step4Result />} />
         <Route path="/step5" element={<Step5Details />} />
+
+        {/* Doctor Flow */}
+        <Route path="/doctor" element={<DoctorHome />} />
+        <Route path="/doctor/list" element={<DoctorList />} />
+        <Route path="/doctor/profile/:id" element={<DoctorProfile />} />
+        <Route path="/doctor/book" element={<BookAppointment />} />
+        <Route path="/doctor/chat" element={<ChatList />} />
+        <Route path="/doctor/call" element={<AudioCall />} />
 
         {/* Catch-all redirect */}
         <Route path="/form" element={<Navigate to="/register" replace />} />

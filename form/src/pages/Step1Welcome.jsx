@@ -19,7 +19,7 @@ function Step1Welcome() {
       </header>
 
       <main className="flex-1 px-4 py-6 max-w-md w-full mx-auto space-y-6">
-        
+
         {/* Welcome Card */}
         <div className="bg-gradient-to-br from-blue-500 to-teal-500 rounded-3xl p-6 text-white text-center shadow-lg relative overflow-hidden">
           <div className="absolute top-4 right-4 bg-white/20 p-2 rounded-2xl backdrop-blur-sm">
@@ -49,6 +49,14 @@ function Step1Welcome() {
             بدء التقييم
             <span className="text-xl mr-2">←</span>
           </button>
+
+          <button
+            onClick={() => navigate("/doctor")}
+            className="w-full mt-4 py-4 bg-white text-blue-600 font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-blue-50 transition border-2 border-blue-500 shadow-sm"
+          >
+            التشخيص
+            <BriefcaseMedical size={20} className="mr-2" />
+          </button>
         </div>
 
         {/* How it works Card */}
@@ -59,7 +67,7 @@ function Step1Welcome() {
             </div>
             <h3 className="text-lg font-bold text-blue-800">كيف يعمل</h3>
           </div>
-          
+
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <div className="bg-blue-100 p-2 rounded-xl text-blue-500">
@@ -67,21 +75,21 @@ function Step1Welcome() {
               </div>
               <p className="text-gray-700 text-sm font-medium">1. اختر أعراض المريض من القائمة الشاملة</p>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <div className="bg-teal-100 p-2 rounded-xl text-teal-600">
                 <BriefcaseMedical size={20} />
               </div>
               <p className="text-gray-700 text-sm font-medium">2. يقترح النظام الحالات ذات الصلة للتقييم</p>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <div className="bg-orange-100 p-2 rounded-xl text-orange-500">
                 <BarChart2 size={20} />
               </div>
               <p className="text-gray-700 text-sm font-medium">3. احصل على تقييم احتمالي مرجح</p>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <div className="bg-green-100 p-2 rounded-xl text-green-600">
                 <FileText size={20} />
