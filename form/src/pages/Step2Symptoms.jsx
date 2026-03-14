@@ -2,31 +2,49 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Search, Check, Menu } from "lucide-react";
 
+// قائمة الأعراض الموحّدة المستخرجة من ملف الأمراض
 const ALL_SYMPTOMS = [
-    "ألم أو حرقان في فم المعدة (يزيد مع الجوع أو بعد الأكل)",
-    "انتفاخ وكثرة الغازات",
+    // المريء
+    "حموضة",
+    "ألم أعلى البطن",
+    "ألم بالصدر",
+    "صعوبة بلع",
+    "حرقة مزمنة بالمريء",
+
+    // المعدة
+    "ألم في المعدة",
+    "ألم شديد في المعدة",
     "غثيان أو قيء",
-    "تجشؤ متكرر",
-    "فقدان الشهية",
-    "إحساس بالشبع بسرعة",
-    "طعم مر أو سيء في الفم",
-    "نقص وزن غير مبرر",
-    "أنيميا وتعب شديد",
-    "حرقة في المعدة",
-    "ألم شديد ومستمر في المعدة",
-    "ارتجاع حمضي متكرر",
-    "ثقل وعدم راحة بعد الأكل",
-    "رغبة في القيء صباحاً",
-    "رائحة فم كريهة مستمرة",
-    "اضطرابات في الهضم",
-    "تقلصات في المعدة",
-    "إسهال أو إمساك متكرر",
-    "براز أسود",
-    "غازات مفرطة",
-    "إرهاق",
-    "شعور بالإغماء أو الدوار",
-    "الشعور بالشبع بعد تناول كميات صغيرة",
-    "شعور بعدم اكتمال حركة الأمعاء"
+
+    // الأمعاء الدقيقة
+    "إسهال متكرر",
+    "فقدان وزن غير مبرر",
+    "انتفاخ البطن",
+    "كثرة الغازات",
+    "نقص فيتامينات أو عناصر غذائية",
+
+    // القولون
+    "ألم بطن",
+    "تقلصات بالبطن",
+    "إسهال دموي",
+    "إمساك متكرر",
+    "شعور بعدم اكتمال حركة الأمعاء",
+
+    // الشرج
+    "نزيف من الشرج أو مع البراز",
+    "ألم أثناء التبرز",
+    "إفرازات من الشرج",
+
+    // الكبد
+    "تعب عام وإرهاق",
+    "تورم البطن (استسقاء)",
+    "اصفرار الجلد أو العينين",
+
+    // المرارة والبنكرياس
+    "ألم شديد أعلى البطن",
+    "ألم بالبطن بعد الأكل الدسم",
+    "ألم مزمن بالبطن",
+    "سوء هضم"
 ];
 
 function Step2Symptoms() {
@@ -124,7 +142,7 @@ function Step2Symptoms() {
                                     </span>
                                 </div>
                                 {isSelected && (
-                                    <span className="px-3 py-1 bg-gradient-to-r from-teal-500 to-blue-500 text-white text-xs font-bold rounded-lg shrink-0">
+                                    <span className="px-3 py-1 bg-linear-to-r from-teal-500 to-blue-500 text-white text-xs font-bold rounded-lg shrink-0">
                                         محدد
                                     </span>
                                 )}
@@ -135,13 +153,13 @@ function Step2Symptoms() {
             </main>
 
             {/* Fixed Bottom Action Bar */}
-            <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#f8fafe] via-[#f8fafe] to-transparent w-full">
+            <div className="fixed bottom-0 left-0 right-0 p-4 bg-linear-to-t from-[#f8fafe] via-[#f8fafe] to-transparent w-full">
                 <div className="max-w-md mx-auto">
                     <button
                         onClick={handleContinue}
                         disabled={selectedSymptoms.length === 0}
                         className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg transition-all ${selectedSymptoms.length > 0
-                            ? "bg-gradient-to-r from-teal-500 to-blue-500 text-white hover:opacity-90"
+                            ? "bg-linear-to-r from-teal-500 to-blue-500 text-white hover:opacity-90"
                             : "bg-gray-300 text-gray-500 cursor-not-allowed"
                             }`}
                     >

@@ -6,7 +6,7 @@ function Step4Result() {
     const navigate = useNavigate();
     const location = useLocation();
     const symptoms = location.state?.symptoms || [];
-    const condition = location.state?.condition || { name: "غير محدد", match: 0 };
+    const condition = location.state?.condition || { name: "غير محدد", match: 0, symptoms: [] };
 
     const percentage = condition.match || 0;
     const score = (percentage * 0.207).toFixed(1);
@@ -16,6 +16,10 @@ function Step4Result() {
     const radius = (size - strokeWidth) / 2;
     const circumference = radius * 2 * Math.PI;
     const offset = circumference - (percentage / 100) * circumference;
+
+    // الأعراض الخاصة بهذا المرض التي قام المستخدم باختيارها
+    const conditionSymptoms = condition.symptoms || [];
+    const matchedSymptoms = conditionSymptoms.filter((s) => symptoms.includes(s));
 
     let severityLabel = "منخفضة";
     let severityColor = "bg-green-500";
@@ -53,7 +57,7 @@ function Step4Result() {
             <main className="flex-1 w-full max-w-md mx-auto flex flex-col">
 
                 {/* Top Section - Circular Progress */}
-                <div className="bg-gradient-to-b from-[#fce4e4] to-[#fcf0f0] pt-10 pb-16 flex flex-col items-center">
+                <div className="bg-linear-to-b from-[#fce4e4] to-[#fcf0f0] pt-10 pb-16 flex flex-col items-center">
                     <h2 className="text-3xl items-center font-bold text-gray-800 mb-8 px-4 text-center">{condition.name}</h2>
 
                     <div className="relative w-64 h-64 flex flex-col items-center justify-center drop-shadow-sm">
@@ -85,13 +89,44 @@ function Step4Result() {
                         </div>
                     </div>
 
-                    <div className={`mt-8 px-12 py-3 ${severityColor} text-white rounded-[2rem] font-bold text-xl shadow-lg ${shadowColor}`}>
+                    <div className={`mt-8 px-12 py-3 ${severityColor} text-white rounded-4xl font-bold text-xl shadow-lg ${shadowColor}`}>
                         {severityLabel}
                     </div>
                 </div>
 
-                {/* Symptoms Tags Section bg-[#e8f1f8] and text-[#335577] for tags */}
-                <div className="px-4 relative top-[-30px] z-10 w-full mb-6">
+                {/* Symptoms for this condition that user selected */}
+                <div className="px-4 relative top-[-30px] z-10 w-full mb-4">
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-teal-100">
+                        <div className="flex flex-row items-center gap-3 mb-4 w-full justify-start">
+                            <div className="bg-teal-50 p-2 rounded-xl text-teal-600">
+                                <Info size={22} />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-800">
+                                الأعراض التي تناسب هذا المرض من التي اخترتها
+                            </h3>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 justify-start">
+                            {matchedSymptoms.length > 0 ? (
+                                matchedSymptoms.map((symptom, index) => (
+                                    <span
+                                        key={index}
+                                        className="px-4 py-2 bg-teal-50 text-teal-800 rounded-2xl text-sm font-semibold whitespace-nowrap"
+                                    >
+                                        {symptom}
+                                    </span>
+                                ))
+                            ) : (
+                                <span className="text-gray-500 bg-gray-50 px-6 py-3 rounded-xl border border-dashed border-gray-200 w-full text-center text-sm">
+                                    لم تُسجَّل أي أعراض من النموذج الخاص بهذا المرض ضمن الأعراض التي اخترتها.
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* All selected symptoms */}
+                <div className="px-4 w-full mb-6">
                     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                         <div className="flex flex-row items-center gap-3 mb-6 w-full justify-start">
                             <div className="bg-[#eaf4fc] p-2 rounded-xl text-[#6b99c3]">
@@ -131,7 +166,7 @@ function Step4Result() {
 
                     <button
                         onClick={() => navigate("/step5", { state: { condition } })}
-                        className="w-full py-4 bg-gradient-to-r from-teal-500 to-blue-500 text-white font-bold rounded-2xl flex items-center justify-center gap-3 hover:opacity-90 transition shadow-lg shadow-blue-500/30 text-lg"
+                        className="w-full py-4 bg-linear-to-r from-teal-500 to-blue-500 text-white font-bold rounded-2xl flex items-center justify-center gap-3 hover:opacity-90 transition shadow-lg shadow-blue-500/30 text-lg"
                     >
                         <FileText size={22} />
                         عرض الشرح التفصيلي
