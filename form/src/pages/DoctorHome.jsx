@@ -2,16 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, Heart as HeartIcon, Home, Calendar, MessageCircle, User, Activity, Flame, Shield, Stethoscope, Wind, Brain, Users, Droplet } from "lucide-react";
 
-const ALL_DOCTORS = [
-    { id: 1, name: "Dr. Jennifer Miller", role: "Pediatrician | Mercy Hospital", img: 30, rating: 4.8, time: "10:30am - 5:30pm" },
-    { id: 2, name: "Dr. Robert Johnson", role: "Neurologist | ABC Hospital", img: 31, rating: 4.9, time: "09:00am - 2:00pm" },
-    { id: 3, name: "Dr. Laura White", role: "Dentist | Cedar Dental care", img: 32, rating: 4.7, time: "12:00pm - 6:00pm" },
-    { id: 4, name: "Dr. Brian Clark", role: "Psychiatrist | ABC hospital", img: 33, rating: 4.6, time: "08:00am - 1:00pm" },
-    { id: 5, name: "Dr. Susan Lee", role: "Cardiologist | Heart Center", img: 34, rating: 5.0, time: "10:00am - 4:00pm" },
-    { id: 6, name: "Dr. James Harris", role: "Dermatologist | Skin Health", img: 35, rating: 4.5, time: "11:00am - 5:00pm" },
-    { id: 7, name: "Dr. Emily Davis", role: "Orthopedic | Bone & Joint", img: 36, rating: 4.8, time: "09:30am - 3:30pm" }
-];
-
+import { DOCTORS } from '../data/doctors';
 export default function DoctorHome() {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
@@ -26,7 +17,7 @@ export default function DoctorHome() {
         );
     };
 
-    const filteredDoctors = ALL_DOCTORS.filter(doc => {
+    const filteredDoctors = DOCTORS.filter(doc => {
         const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             doc.role.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesFavorite = showFavoritesOnly ? favorites.includes(doc.id) : true;

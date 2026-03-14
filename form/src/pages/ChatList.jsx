@@ -1,18 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Search, Heart, Home, Calendar, MessageCircle, User, Phone, Video } from "lucide-react";
+import { DOCTORS } from '../data/doctors';
 
 export default function ChatList() {
     const navigate = useNavigate();
-
-    const chats = [
-        { name: "David H. Brown", role: "Psychologists", img: 50 },
-        { name: "Robert Johnson", role: "Neurologist", img: 30 },
-        { name: "Laura White", role: "Dentist", img: 31 },
-        { name: "Jennifer Miller", role: "Pediatrician", img: 32 },
-        { name: "Brian Clark", role: "Psychiatrist", img: 33 },
-        { name: "Jaden John", role: "Cardiologist", img: 34 }
-    ];
 
     return (
         <div className="min-h-screen bg-white font-sans flex flex-col pt-6 pb-20" dir="ltr">
@@ -31,8 +23,8 @@ export default function ChatList() {
             </header>
 
             <main className="flex-1">
-                {chats.map((chat, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-4 px-6 border-b border-gray-50 hover:bg-gray-50 cursor-pointer">
+                {DOCTORS.map((chat, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-4 px-6 border-b border-gray-50 hover:bg-gray-50 cursor-pointer" onClick={() => navigate('/doctor/chat')}>
                         <div className="flex items-center gap-4">
                             <img src={`https://i.pravatar.cc/150?img=${chat.img}`} alt={chat.name} className="w-14 h-14 rounded-full" />
                             <div>
@@ -41,7 +33,7 @@ export default function ChatList() {
                             </div>
                         </div>
                         <div className="flex items-center gap-6 text-gray-400">
-                            <button onClick={(e) => { e.stopPropagation(); navigate('/doctor/call'); }} className="hover:text-blue-500"><Phone size={22} /></button>
+                            <button onClick={(e) => { e.stopPropagation(); navigate('/doctor/call', { state: { doctor: chat } }); }} className="hover:text-blue-500"><Phone size={22} /></button>
                             <button className="hover:text-blue-500"><Video size={24} /></button>
                         </div>
                     </div>

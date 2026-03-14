@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Volume2, Video, MicOff, PhoneOff } from "lucide-react";
+import { DOCTORS } from '../data/doctors';
 
 export default function AudioCall() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [seconds, setSeconds] = useState(0);
+
+    const doctor = location.state?.doctor || DOCTORS[0];
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -36,10 +40,10 @@ export default function AudioCall() {
                 <div className="relative mb-6">
                     <div className="absolute inset-0 bg-white/10 rounded-full scale-[1.3] animate-pulse"></div>
                     <div className="absolute inset-0 bg-white/20 rounded-full scale-[1.1] animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                    <img src="https://i.pravatar.cc/300?img=50" alt="Doctor" className="w-40 h-40 rounded-full relative z-10 border-4 border-white/30" />
+                    <img src={`https://i.pravatar.cc/300?img=${doctor.img}`} alt={doctor.name} className="w-40 h-40 rounded-full relative z-10 border-4 border-white/30" />
                 </div>
 
-                <h2 className="text-3xl font-bold text-white mb-2">David H. Brown</h2>
+                <h2 className="text-3xl font-bold text-white mb-2">{doctor.name}</h2>
                 <p className="text-blue-200 text-lg">{formatTime(1335 + seconds)}</p>
             </main>
 
