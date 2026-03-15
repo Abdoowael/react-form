@@ -15,6 +15,7 @@ import DoctorList from "./pages/DoctorList";
 import DoctorProfile from "./pages/DoctorProfile";
 import BookAppointment from "./pages/BookAppointment";
 import ChatList from "./pages/ChatList";
+import Chat from "./pages/Chat";
 import AudioCall from "./pages/AudioCall";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/doctor/profile/:id" element={<DoctorProfile />} />
         <Route path="/doctor/book" element={<BookAppointment />} />
         <Route path="/doctor/chat" element={<ChatList />} />
+        <Route path="/doctor/chat/:id" element={<Chat />} />
         <Route path="/doctor/call" element={<AudioCall />} />
 
         {/* Catch-all redirect */}

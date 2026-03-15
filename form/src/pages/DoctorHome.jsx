@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Search, Heart as HeartIcon, Home, Calendar, MessageCircle, User, Activity, Flame, Shield, Stethoscope, Wind, Brain, Users, Droplet } from "lucide-react";
 
 import { DOCTORS } from '../data/doctors';
-import DoctorBottomNav from "../components/DoctorBottomNav";
+import DoctorTopNav from "../components/DoctorTopNav";
 
 export default function DoctorHome() {
     const navigate = useNavigate();
@@ -27,20 +27,23 @@ export default function DoctorHome() {
     });
 
     return (
-        <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans pb-20" dir="ltr">
-            <header className="flex items-center justify-between p-6 bg-white gap-4 h-24 transition-all duration-300">
+        <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans" dir="ltr">
+            <DoctorTopNav />
+
+            {/* Old Custom Header for DoctorHome Removed, use Top Nav directly */}
+            <div className="flex items-center justify-between px-6 pt-6 pb-2 bg-[#f8fafe] gap-4 transition-all duration-300">
                 <div className={`items-center gap-3 transition-opacity duration-300 ${isSearchActive ? 'hidden sm:flex' : 'flex'}`}>
                     <div className="w-12 h-12 bg-orange-100 rounded-full overflow-hidden shrink-0">
                         <img src="https://i.pravatar.cc/150?img=11" alt="User" />
                     </div>
                     <div className="whitespace-nowrap">
                         <p className="text-gray-400 text-sm">Welcome Back</p>
-                        <h1 className="text-xl font-bold text-gray-800">Andrew Smith</h1>
+                        <h1 className="text-xl font-bold text-gray-800">Abdo|Magdy</h1>
                     </div>
                 </div>
 
                 <div className={`flex items-center gap-2 text-gray-600 justify-end ${isSearchActive ? 'flex-1' : ''}`}>
-                    <div className={`flex items-center rounded-full transition-all duration-500 ease-in-out border ${isSearchActive ? 'flex-1 max-w-[300px] bg-gray-50 border-gray-200 px-4 py-2' : 'w-10 h-10 bg-transparent border-transparent justify-center'}`}>
+                    <div className={`flex items-center rounded-full transition-all duration-500 ease-in-out border ${isSearchActive ? 'flex-1 max-w-[300px] bg-white border-gray-200 shadow-sm px-4 py-2' : 'w-10 h-10 bg-transparent border-transparent justify-center'}`}>
                         <button
                             onMouseDown={(e) => e.preventDefault()}
                             onClick={() => {
@@ -68,12 +71,12 @@ export default function DoctorHome() {
 
                     <button
                         onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-                        className={`transition-colors shrink-0 p-2 rounded-full ${showFavoritesOnly ? 'text-red-500' : 'hover:text-red-500'}`}
+                        className={`bg-white shadow-sm transition-colors shrink-0 p-2 rounded-full border border-gray-100 ${showFavoritesOnly ? 'text-red-500' : 'hover:text-red-500'}`}
                     >
                         <HeartIcon size={24} className={showFavoritesOnly ? "fill-red-500" : ""} />
                     </button>
                 </div>
-            </header>
+            </div>
 
             <main className="flex-1 px-6 space-y-8 mt-4">
                 {/* Upcoming Appointments */}
@@ -109,7 +112,7 @@ export default function DoctorHome() {
                 </section>
 
                 {/* Categories */}
-                <section>
+                {/* <section>
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="text-xl font-bold text-gray-800">Categories</h2>
                         <button className="text-blue-500 font-medium">See all</button>
@@ -133,7 +136,7 @@ export default function DoctorHome() {
                             </div>
                         ))}
                     </div>
-                </section>
+                </section> */}
 
                 {/* Find Doctors */}
                 <section>
@@ -167,7 +170,7 @@ export default function DoctorHome() {
                                         <span className="text-yellow-500 gap-1 flex items-center">{doc.rating} <span className="text-xl leading-none -mt-1">★</span></span>
                                         <span>🕒 {doc.time}</span>
                                     </div>
-                                    <button onClick={() => navigate(`/doctor/profile/${doc.id}`)} className="w-full py-3 bg-[#e8f1fc] text-blue-600 font-bold rounded-2xl hover:bg-blue-100 transition">
+                                    <button onClick={() => navigate(`/doctor/book/`, { state: { doctor: doc } })} className="w-full py-3 bg-[#e8f1fc] text-blue-600 font-bold rounded-2xl hover:bg-blue-100 transition">
                                         Book Appointment
                                     </button>
                                 </div>
@@ -181,7 +184,7 @@ export default function DoctorHome() {
                 </section>
             </main>
 
-            <DoctorBottomNav />
+           
         </div>
     );
 } 

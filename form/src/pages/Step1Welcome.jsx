@@ -54,7 +54,7 @@ function Step1Welcome() {
             onClick={() => navigate("/doctor")}
             className="w-full mt-4 py-4 bg-white text-blue-600 font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-blue-50 transition border-2 border-blue-500 shadow-sm"
           >
-            التشخيص
+            حجز موعد  
             <BriefcaseMedical size={20} className="mr-2" />
           </button>
         </div>

@@ -1,6 +1,145 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ArrowRight, Info, FileText, Home, ListChecks } from "lucide-react";
+import { ArrowRight, Info, FileText, Home, ListChecks, CheckCircle2, XCircle } from "lucide-react";
+
+export const diseaseFoodsMapping = {
+    // أمراض المريء
+    "ارتجاع المريء": {
+        harmful: ["الأكل الدسم", "القهوة", "الشوكولاتة", "الأطعمة الحارة"],
+        beneficial: ["الشوفان", "الموز", "الخضار المسلوق"]
+    },
+    "مريء باريت": {
+        harmful: ["الدهون", "المقليات", "الكحول"],
+        beneficial: ["الخضروات", "الفواكه", "الأطعمة قليلة الدهون"]
+    },
+    "سرطان المريء": {
+        harmful: ["الكحول", "التدخين", "الأطعمة الحارة"],
+        beneficial: ["أطعمة غنية بالبروتين", "خضروات", "شوربة"]
+    },
+    "تقلصات المريء": {
+        harmful: ["الكافيين", "الأطعمة القاسية"],
+        beneficial: ["أطعمة خفيفة", "زبادي", "خضار"]
+    },
+    // أمراض المعدة
+    "جرثومة المعدة": {
+        harmful: ["الأكل الحار", "المقليات", "القهوة"],
+        beneficial: ["الزبادي", "العسل", "البروكلي"]
+    },
+    "التهاب المعدة المزمن": {
+        harmful: ["الكحول", "التوابل", "المقليات"],
+        beneficial: ["الأرز", "الموز", "البطاطس المسلوقة"]
+    },
+    "قرحة المعدة": {
+        harmful: ["القهوة", "الأكل الحار", "التدخين"],
+        beneficial: ["الشوفان", "العسل", "اللبن"]
+    },
+    "سرطان المعدة": {
+        harmful: ["اللحوم المصنعة", "الأطعمة المدخنة"],
+        beneficial: ["بروتينات خفيفة", "خضروات"]
+    },
+    // أمراض الأمعاء
+    "السيلياك": {
+        harmful: ["القمح", "الشعير", "الجلوتين"],
+        beneficial: ["الأرز", "الذرة", "البطاطس"]
+    },
+    "نمو بكتيري زائد": {
+        harmful: ["السكريات", "الأطعمة المصنيعة"],
+        beneficial: ["الزبادي", "الأطعمة قليلة السكر"]
+    },
+    "داء كرون": {
+        harmful: ["الأطعمة الدسمة", "الأطعمة الحارة"],
+        beneficial: ["الأرز", "الدجاج", "الموز"]
+    },
+    "سوء الامتصاص": {
+        harmful: ["الأطعمة المصنعة"],
+        beneficial: ["أطعمة غنية بالفيتامينات"]
+    },
+    // أمراض القولون
+    "القولون العصبي": {
+        harmful: ["الفاصوليا", "الكافيين", "الأطعمة الحارة"],
+        beneficial: ["الشوفان", "الزبادي", "النعناع"]
+    },
+    "القولون التقرحي": {
+        harmful: ["المقليات", "الأطعمة الحارة"],
+        beneficial: ["الأرز", "البطاطس", "البروتين الخفيف"]
+    },
+    "زوائد قولونية": {
+        harmful: ["اللحوم المصنعة"],
+        beneficial: ["الخضروات", "الألياف"]
+    },
+    "سرطان القولون": {
+        harmful: ["اللحوم المصنعة", "الدهون"],
+        beneficial: ["الخضروات", "الفواكه", "الألياف"]
+    },
+    // أمراض الشرج
+    "البواسير": {
+        harmful: ["الإمساك", "الأطعمة الحارة"],
+        beneficial: ["الألياف", "الماء", "الخضروات"]
+    },
+    "الشق الشرجي": {
+        harmful: ["الأطعمة التي تسبب الإمساك"],
+        beneficial: ["الألياف", "الفواكه"]
+    },
+    "الناسور الشرجي": {
+        harmful: ["الأطعمة الملوثة"],
+        beneficial: ["غذاء صحي متوازن"]
+    },
+    "سرطان المستقيم": {
+        harmful: ["اللحوم المصنعة"],
+        beneficial: ["ألياف", "خضروات"]
+    },
+    // أمراض الكبد
+    "الكبد الدهني": {
+        harmful: ["الدهون", "السكريات"],
+        beneficial: ["الخضروات", "السمك", "زيت الزيتون"]
+    },
+    "تليف الكبد": {
+        harmful: ["الكحول", "الدهون"],
+        beneficial: ["البروتين الخفيف", "الخضار"]
+    },
+    "فيروس سي": {
+        harmful: ["الكحول", "الدهون"],
+        beneficial: ["غذاء صحي", "فواكه"]
+    },
+    "سرطان الكبد": {
+        harmful: ["الكحول", "الأطعمة الملوثة"],
+        beneficial: ["أطعمة مغذية", "بروتين"]
+    },
+    // أمراض المرارة
+    "حصوات المرارة": {
+        harmful: ["الدهون", "المقليات"],
+        beneficial: ["خضروات", "فواكه", "ألياف"]
+    },
+    "التهاب المرارة": {
+        harmful: ["الدهون"],
+        beneficial: ["أطعمة خفيفة"]
+    },
+    "انسداد القناة المرارية": {
+        harmful: ["الدهون الثقيلة"],
+        beneficial: ["أطعمة قليلة الدهون"]
+    },
+    "سرطان المرارة": {
+        harmful: ["الدهون والمقليات"],
+        beneficial: ["غذاء صحي"]
+    },
+    // أمراض البنكرياس
+    "التهاب البنكرياس الحاد": {
+        harmful: ["الكحول", "الدهون"],
+        beneficial: ["أطعمة خفيفة", "سوائل"]
+    },
+    "التهاب البنكرياس المزمن": {
+        harmful: ["الكحول", "المقليات"],
+        beneficial: ["أطعمة قليلة الدهون"]
+    },
+    "سرطان البنكرياس": {
+        harmful: ["الدهون الثقيلة"],
+        beneficial: ["بروتين خفيف", "خضروات"]
+    },
+    "قصور البنكرياس": {
+        harmful: ["الأطعمة الدسمة"],
+        beneficial: ["أطعمة سهلة الهضم"]
+    }
+};
 
 function Step4Result() {
     const navigate = useNavigate();
@@ -125,34 +264,45 @@ function Step4Result() {
                     </div>
                 </div>
 
-                {/* All selected symptoms */}
-                <div className="px-4 w-full mb-6">
-                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <div className="flex flex-row items-center gap-3 mb-6 w-full justify-start">
-                            <div className="bg-[#eaf4fc] p-2 rounded-xl text-[#6b99c3]">
-                                <ListChecks size={24} />
+                {/* Foods Table for the current condition */}
+                {diseaseFoodsMapping[condition.name] && (
+                    <div className="px-4 relative top-[-30px] z-10 w-full mb-6">
+                        <div className="bg-white rounded-2xl p-0 shadow-md border border-gray-100 overflow-hidden">
+                            <div className="flex text-center text-sm sm:text-base font-bold text-white">
+                                <div className="flex-1 bg-green-500 py-3 flex items-center justify-center gap-2">
+                                    <CheckCircle2 size={18} />
+                                    الأطعمة المفيدة
+                                </div>
+                                <div className="flex-1 bg-red-500 py-3 flex items-center justify-center gap-2">
+                                    <XCircle size={18} />
+                                    الأطعمة الضارة
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold text-gray-800">الأعراض المحددة</h3>
-                        </div>
-
-                        <div className="flex flex-wrap gap-2 justify-start">
-                            {symptoms.length > 0 ? (
-                                symptoms.map((symptom, index) => (
-                                    <span
-                                        key={index}
-                                        className="px-4 py-2 bg-[#eaf4fc] text-[#4d6a86] rounded-2xl text-sm font-semibold whitespace-nowrap"
-                                    >
-                                        {symptom}
-                                    </span>
-                                ))
-                            ) : (
-                                <span className="text-gray-400 bg-gray-50 px-6 py-3 rounded-xl border border-dashed border-gray-200 w-full text-center">
-                                    لم يتم تحديد أي أعراض
-                                </span>
-                            )}
+                            <div className="flex divide-x divide-x-reverse divide-gray-100">
+                                <div className="flex-1 p-5 bg-green-50/50">
+                                    <ul className="space-y-3">
+                                        {diseaseFoodsMapping[condition.name].beneficial.map((food, idx) => (
+                                            <li key={idx} className="flex items-center gap-3 text-green-800 text-sm font-semibold">
+                                                <div className="w-2 h-2 rounded-full bg-green-500 shrink-0"></div>
+                                                {food}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="flex-1 p-5 bg-red-50/50">
+                                    <ul className="space-y-3">
+                                        {diseaseFoodsMapping[condition.name].harmful.map((food, idx) => (
+                                            <li key={idx} className="flex items-center gap-3 text-red-800 text-sm font-semibold">
+                                                <div className="w-2 h-2 rounded-full bg-red-500 shrink-0"></div>
+                                                {food}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
 
                 {/* Action Buttons */}
                 <div className="space-y-4 px-4 pb-6 mt-auto">

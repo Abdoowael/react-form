@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Search, Heart, Clock } from "lucide-react";
 
 import { DOCTORS } from '../data/doctors';
-import DoctorBottomNav from "../components/DoctorBottomNav";
+import DoctorTopNav from "../components/DoctorTopNav";
 
 export default function DoctorProfile() {
     const navigate = useNavigate();
@@ -17,8 +17,9 @@ export default function DoctorProfile() {
         DOCTORS[0];
 
     return (
-        <div className="min-h-screen bg-blue-600 font-sans flex flex-col pt-6 relative" dir="ltr">
-            {/* Header */}
+        <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans pb-4" dir="ltr">
+            <DoctorTopNav />
+            {/* Header Image & Actions */}
             <header className="flex items-center justify-between px-6 text-white absolute w-full top-6 z-10">
                 <button onClick={() => navigate(-1)} className="flex items-center gap-2">
                     <ArrowLeft size={24} />
@@ -66,8 +67,20 @@ export default function DoctorProfile() {
                     </div>
                 </div>
 
+                {location.state?.bookedDate && location.state?.bookedTime && (
+                    <div className="bg-green-50 border border-green-200 rounded-2xl p-4 mb-8 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
+                        <h3 className="font-bold text-green-800 text-lg mb-1 flex items-center gap-2">
+                            <span>✅</span> Appointment Confirmed!
+                        </h3>
+                        <p className="text-green-700 text-sm">
+                            You have successfully booked an appointment on <span className="font-bold">{location.state.bookedDate}</span> at <span className="font-bold">{location.state.bookedTime}</span>.
+                        </p>
+                    </div>
+                )}
+
                 {/* Date Selection */}
-                <h3 className="font-bold text-lg text-gray-800 mb-4">Select Date</h3>
+                {/* <h3 className="font-bold text-lg text-gray-800 mb-4">Select Date</h3>
                 <div className="flex gap-4 mb-8">
                     <select className="flex-1 bg-gray-50 rounded-2xl py-4 flex items-center justify-between px-4 text-gray-500 outline-none border border-transparent focus:border-blue-500">
                         <option>8</option>
@@ -77,27 +90,26 @@ export default function DoctorProfile() {
                         <option>October, Sun</option>
                         <option>October, Mon</option>
                     </select>
-                </div>
+                </div> */}
 
                 {/* Schedules */}
-                <h3 className="font-bold text-lg text-gray-800 mb-4">Schedules</h3>
+                {/* <h3 className="font-bold text-lg text-gray-800 mb-4">Schedules</h3>
                 <div className="grid grid-cols-2 gap-4 mb-20">
                     {['10:30am - 11:30am', '11:30am - 12:30pm', '12:30pm - 1:30pm', '2:30am - 3:30pm', '3:30am - 4:30pm', '4:30am - 5:30pm'].map((time, idx) => (
                         <div key={time} className={`py-4 rounded-2xl text-center text-sm font-medium border cursor-pointer transition ${idx === 3 ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-50 text-gray-500 border-gray-100 hover:border-blue-300'}`}>
                             {time}
                         </div>
                     ))}
-                </div>
+                </div> */}
 
                 <div className="fixed bottom-[88px] left-0 w-full bg-white p-6 pb-6 border-t border-gray-100 z-40 rounded-t-3xl shadow-[0_-10px_20px_-15px_rgba(0,0,0,0.1)]">
                     <button
-                        onClick={() => navigate('/doctor/book', { state: { doctor } })}
+                        onClick={() => navigate(`/doctor/chat/${doctor.id}`, { state: { doctor } })}
                         className="w-full max-w-md mx-auto block py-4 bg-blue-600 text-white font-bold text-lg rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-blue-500/30"
                     >
-                        Book Appointment
+                       Chat with Doctor
                     </button>
                 </div>
-                <DoctorBottomNav />
             </main>
         </div>
     );

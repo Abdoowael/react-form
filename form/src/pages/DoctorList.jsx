@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Search, Heart, Home, Calendar, MessageCircle, User, ArrowLeft } from "lucide-react";
+import { Star, MapPin, Clock, Search, Heart, Filter, ArrowLeft } from "lucide-react";
 import { DOCTORS } from "../data/doctors";
-import DoctorBottomNav from "../components/DoctorBottomNav";
+import DoctorTopNav from "../components/DoctorTopNav";
 
 export default function DoctorList() {
     const navigate = useNavigate();
@@ -36,7 +36,9 @@ export default function DoctorList() {
     const title = condition ? "الأطباء المقترحون" : "Available Doctors";
 
     return (
-        <div className="min-h-screen bg-white flex flex-col font-sans pb-20" dir="ltr">
+        <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans pb-4" dir="ltr">
+
+            <DoctorTopNav />
             {/* Header */}
             <header className="flex items-center justify-between p-6 bg-white sticky top-0 z-10 border-b border-gray-100">
                 <div className="flex items-center gap-4">
@@ -79,8 +81,6 @@ export default function DoctorList() {
                     ))}
                 </div>
             </main>
-
-            <DoctorBottomNav />
         </div>
     );
 } 

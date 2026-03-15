@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeft, Search, Heart, Star } from "lucide-react";
-import DoctorBottomNav from "../components/DoctorBottomNav";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Calendar as CalendarIcon, Clock, User, MessageCircle, Star, Heart, Search } from "lucide-react";
+import DoctorTopNav from "../components/DoctorTopNav";
 
 export default function BookAppointment() {
     const navigate = useNavigate();
@@ -44,20 +44,21 @@ export default function BookAppointment() {
     const [message, setMessage] = useState("");
 
     return (
-        <div className="min-h-screen bg-white font-sans flex flex-col pt-6 px-6 pb-28" dir="ltr">
+        <div className="min-h-screen bg-[#f8fafe]  flex flex-col font-sans pb-4" dir="ltr">
+            <DoctorTopNav />
             {/* Header */}
-            <header className="flex items-center justify-between text-gray-800 mb-8">
+            {/* <header className="flex items-center justify-between text-gray-800 mb-8">
                 <button onClick={() => navigate(-1)} className="flex items-center gap-2">
-                    <ArrowLeft size={24} />
+                    <CalendarIcon size={24} />
                     <span className="font-bold">Appointment Details</span>
                 </button>
                 <div className="flex gap-4">
                     <Search size={22} className="text-gray-600" />
                     <Heart size={22} className="text-gray-600" />
                 </div>
-            </header>
+            </header> */}
 
-            <main className="flex-1 flex flex-col">
+            <main className="flex-1 ms-4 flex flex-col">
                 {/* Doctor Info Card */}
                 <div className="bg-white rounded-3xl p-4 shadow-sm flex items-start gap-4 border border-gray-100 mb-8">
                     <img src={`https://i.pravatar.cc/150?img=${doctor.img}`} alt={doctor.name} className="w-16 h-16 rounded-full" />
@@ -147,10 +148,11 @@ export default function BookAppointment() {
                 {/* Next Button */}
                 <button
                     onClick={() =>
-                        selectedTime && navigate('/doctor/chat', {
+                        selectedTime && navigate(`/doctor/profile/${doctor.id}`, {
                             state: {
-                                date: DATES.find((d) => d.id === selectedDate)?.label,
-                                time: selectedTime,
+                                doctor: doctor,
+                                bookedDate: DATES.find((d) => d.id === selectedDate)?.label,
+                                bookedTime: selectedTime,
                                 note: message,
                             },
                         })
@@ -165,7 +167,6 @@ export default function BookAppointment() {
                     Confirm & Continue
                 </button>
             </main>
-            <DoctorBottomNav />
         </div>
     );
 }

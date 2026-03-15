@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Volume2, Video, MicOff, PhoneOff } from "lucide-react";
 import { DOCTORS } from '../data/doctors';
+import DoctorTopNav from "../components/DoctorTopNav";
 
 export default function AudioCall() {
     const navigate = useNavigate();
@@ -26,16 +27,17 @@ export default function AudioCall() {
     };
 
     return (
-        <div className="min-h-screen bg-blue-600 font-sans flex flex-col pt-6 relative" dir="ltr">
+        <div className="min-h-screen bg-[#f8fafe] font-sans flex flex-col pb-4" dir="ltr">
+            {/* <DoctorTopNav /> */}
             {/* Header */}
-            <header className="flex items-center px-6 text-white absolute w-full top-6 z-10">
+            <header className="flex items-center px-6 text-gray-800 w-full top-6 z-10 pt-4">
                 <button onClick={() => navigate(-1)} className="flex items-center gap-4">
                     <ArrowLeft size={24} />
                     <span className="font-bold text-lg">Audio Call</span>
                 </button>
             </header>
 
-            <main className="flex-1 flex flex-col items-center justify-center -mt-20">
+            <main className="flex-1 flex flex-col items-center justify-center -mt-10 bg-blue-600 rounded-[2.5rem] mx-4 mt-6 mb-6 shadow-xl shadow-blue-600/20 relative overflow-hidden">
                 {/* Doctor Image */}
                 <div className="relative mb-6">
                     <div className="absolute inset-0 bg-white/10 rounded-full scale-[1.3] animate-pulse"></div>
@@ -52,12 +54,8 @@ export default function AudioCall() {
                     <button className="w-16 h-16 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition">
                         <Volume2 size={28} />
                     </button>
-                    <button className="w-16 h-16 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition">
-                        <Video size={28} />
-                    </button>
-                    <button className="w-16 h-16 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition">
-                        <MicOff size={28} />
-                    </button>
+                
+                    
                 </div>
                 <div className="flex justify-center mt-10">
                     <button onClick={() => navigate(-1)} className="w-20 h-20 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition shadow-lg shadow-red-500/30">
