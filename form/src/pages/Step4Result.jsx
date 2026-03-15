@@ -126,7 +126,33 @@ function Step4Result() {
                 </div>
 
                 {/* All selected symptoms */}
-               
+                <div className="px-4 w-full mb-6">
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div className="flex flex-row items-center gap-3 mb-6 w-full justify-start">
+                            <div className="bg-[#eaf4fc] p-2 rounded-xl text-[#6b99c3]">
+                                <ListChecks size={24} />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-800">الأعراض المحددة</h3>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 justify-start">
+                            {symptoms.length > 0 ? (
+                                symptoms.map((symptom, index) => (
+                                    <span
+                                        key={index}
+                                        className="px-4 py-2 bg-[#eaf4fc] text-[#4d6a86] rounded-2xl text-sm font-semibold whitespace-nowrap"
+                                    >
+                                        {symptom}
+                                    </span>
+                                ))
+                            ) : (
+                                <span className="text-gray-400 bg-gray-50 px-6 py-3 rounded-xl border border-dashed border-gray-200 w-full text-center">
+                                    لم يتم تحديد أي أعراض
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
 
                 {/* Action Buttons */}
                 <div className="space-y-4 px-4 pb-6 mt-auto">
