@@ -310,7 +310,7 @@ function Step4Result() {
                         onClick={() => {
                             sessionStorage.setItem("fromMedicalVisits", "true");
                             sessionStorage.setItem("medicalCondition", JSON.stringify(condition));
-                            navigate("/doctor/list", { state: { condition } });
+                            navigate("/doctor", { state: { condition } });
                         }}
                         className="w-full py-4 bg-white text-teal-600 font-bold rounded-2xl flex items-center justify-center gap-3 border-2 border-teal-100 hover:bg-teal-50 transition shadow-sm text-lg"
                     >
