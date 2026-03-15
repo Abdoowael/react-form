@@ -3,6 +3,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Search, Heart, Clock } from "lucide-react";
 
 import { DOCTORS } from '../data/doctors';
+import DoctorBottomNav from "../components/DoctorBottomNav";
+
 export default function DoctorProfile() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -87,7 +89,7 @@ export default function DoctorProfile() {
                     ))}
                 </div>
 
-                <div className="fixed bottom-0 left-0 w-full bg-white p-6 pb-8 border-t border-gray-100 z-50">
+                <div className="fixed bottom-[88px] left-0 w-full bg-white p-6 pb-6 border-t border-gray-100 z-40 rounded-t-3xl shadow-[0_-10px_20px_-15px_rgba(0,0,0,0.1)]">
                     <button
                         onClick={() => navigate('/doctor/book', { state: { doctor } })}
                         className="w-full max-w-md mx-auto block py-4 bg-blue-600 text-white font-bold text-lg rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-blue-500/30"
@@ -95,6 +97,7 @@ export default function DoctorProfile() {
                         Book Appointment
                     </button>
                 </div>
+                <DoctorBottomNav />
             </main>
         </div>
     );

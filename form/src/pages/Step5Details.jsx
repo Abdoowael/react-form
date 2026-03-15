@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ArrowRight, BriefcaseMedical, ThumbsUp, AlertTriangle } from "lucide-react";
+import { ArrowRight, BriefcaseMedical, ThumbsUp, AlertTriangle, Pill, Microscope, Activity, ClipboardList } from "lucide-react";
 
 function Step5Details() {
     const navigate = useNavigate();
@@ -36,6 +36,53 @@ function Step5Details() {
                         </p>
                     </div>
                 </div>
+
+                {/* Treatment Plan Card (Dynamic based on condition data) */}
+                {condition.treatment && (
+                    <div className="bg-emerald-50 rounded-3xl p-6 shadow-sm border border-emerald-100">
+                        <div className="flex items-center gap-3 mb-5 w-full justify-between">
+                            <h3 className="text-lg font-bold text-emerald-900">الخطة الطبية المقترحة</h3>
+                            <div className="bg-emerald-100 p-2 rounded-xl text-emerald-600">
+                                <ClipboardList size={24} />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4">
+                            {/* Treatment */}
+                            <div className="bg-white p-4 rounded-2xl border border-emerald-50 flex items-start gap-4 shadow-sm hover:shadow-md transition">
+                                <div className="bg-emerald-50 p-2.5 rounded-xl text-emerald-600 shrink-0">
+                                    <Pill size={22} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-gray-800 mb-1">العلاج المتوقع</h4>
+                                    <p className="text-gray-600 text-sm font-medium leading-relaxed">{condition.treatment}</p>
+                                </div>
+                            </div>
+
+                            {/* Analysis / Endoscopy */}
+                            <div className="bg-white p-4 rounded-2xl border border-emerald-50 flex items-start gap-4 shadow-sm hover:shadow-md transition">
+                                <div className="bg-blue-50 p-2.5 rounded-xl text-blue-600 shrink-0">
+                                    <Microscope size={22} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-gray-800 mb-1">التحاليل والمنظار</h4>
+                                    <p className="text-gray-600 text-sm font-medium leading-relaxed">{condition.test}</p>
+                                </div>
+                            </div>
+
+                            {/* Surgery */}
+                            <div className="bg-white p-4 rounded-2xl border border-emerald-50 flex items-start gap-4 shadow-sm hover:shadow-md transition">
+                                <div className="bg-rose-50 p-2.5 rounded-xl text-rose-600 shrink-0">
+                                    <Activity size={22} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-gray-800 mb-1">احتمالية الجراحة</h4>
+                                    <p className="text-gray-600 text-sm font-medium leading-relaxed">{condition.surgery}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Recommendations Card */}
                 <div className="bg-red-50 rounded-3xl p-6 shadow-sm border border-red-100">

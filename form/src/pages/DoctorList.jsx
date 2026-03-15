@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Search, Heart, Home, Calendar, MessageCircle, User, ArrowLeft } from "lucide-react";
 import { DOCTORS } from "../data/doctors";
+import DoctorBottomNav from "../components/DoctorBottomNav";
 
 export default function DoctorList() {
     const navigate = useNavigate();
@@ -79,32 +80,7 @@ export default function DoctorList() {
                 </div>
             </main>
 
-            {/* Bottom Navigation - موحد مع DoctorHome */}
-            <nav className="fixed bottom-0 w-full bg-blue-600 text-blue-200 rounded-t-4xl px-8 py-5 flex justify-around items-center z-50">
-                {/* Home */}
-                <button onClick={() => navigate('/doctor')} className="flex flex-col items-center gap-1">
-                    <Home size={28} />
-                    <span className="text-sm font-medium">Home</span>
-                </button>
-
-                {/* Bookings (current) */}
-                <button className="flex flex-col items-center gap-1 text-white">
-                    <Calendar size={28} />
-                    <span className="text-sm font-medium">Bookings</span>
-                </button>
-
-                {/* Chat */}
-                <button onClick={() => navigate('/doctor/chat')} className="flex flex-col items-center gap-1">
-                    <MessageCircle size={28} />
-                    <span className="text-sm font-medium">Chat</span>
-                </button>
-
-                {/* Profile */}
-                <button onClick={() => navigate('/doctor/profile/1')} className="flex flex-col items-center gap-1">
-                    <User size={28} />
-                    <span className="text-sm font-medium">Profile</span>
-                </button>
-            </nav>
+            <DoctorBottomNav />
         </div>
     );
 } 

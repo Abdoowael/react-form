@@ -157,7 +157,11 @@ function Step4Result() {
                 {/* Action Buttons */}
                 <div className="space-y-4 px-4 pb-6 mt-auto">
                     <button
-                        onClick={() => navigate("/doctor/list", { state: { condition } })}
+                        onClick={() => {
+                            sessionStorage.setItem("fromMedicalVisits", "true");
+                            sessionStorage.setItem("medicalCondition", JSON.stringify(condition));
+                            navigate("/doctor/list", { state: { condition } });
+                        }}
                         className="w-full py-4 bg-white text-teal-600 font-bold rounded-2xl flex items-center justify-center gap-3 border-2 border-teal-100 hover:bg-teal-50 transition shadow-sm text-lg"
                     >
                         <ListChecks size={22} />

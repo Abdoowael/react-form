@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, Search, Heart, Star } from "lucide-react";
+import DoctorBottomNav from "../components/DoctorBottomNav";
 
 export default function BookAppointment() {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ export default function BookAppointment() {
     const [message, setMessage] = useState("");
 
     return (
-        <div className="min-h-screen bg-white font-sans flex flex-col pt-6 px-6" dir="ltr">
+        <div className="min-h-screen bg-white font-sans flex flex-col pt-6 px-6 pb-28" dir="ltr">
             {/* Header */}
             <header className="flex items-center justify-between text-gray-800 mb-8">
                 <button onClick={() => navigate(-1)} className="flex items-center gap-2">
@@ -164,6 +165,7 @@ export default function BookAppointment() {
                     Confirm & Continue
                 </button>
             </main>
+            <DoctorBottomNav />
         </div>
     );
 }

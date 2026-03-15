@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Search, Heart as HeartIcon, Home, Calendar, MessageCircle, User, Activity, Flame, Shield, Stethoscope, Wind, Brain, Users, Droplet } from "lucide-react";
 
 import { DOCTORS } from '../data/doctors';
+import DoctorBottomNav from "../components/DoctorBottomNav";
+
 export default function DoctorHome() {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
@@ -179,32 +181,7 @@ export default function DoctorHome() {
                 </section>
             </main>
 
-            {/* Bottom Navigation - ثابت لصفحات الدكتور فقط */}
-            <nav className="fixed bottom-0 w-full bg-blue-600 text-blue-200 rounded-t-4xl px-8 py-5 flex justify-around items-center z-50">
-                {/* Doctor Home */}
-                <button onClick={() => navigate('/doctor')} className="flex flex-col items-center gap-1 text-white">
-                    <Home size={28} />
-                    <span className="text-sm font-medium">Home</span>
-                </button>
-
-                {/* Appointments / Bookings */}
-                <button onClick={() => navigate('/doctor/book')} className="flex flex-col items-center gap-1">
-                    <Calendar size={28} />
-                    <span className="text-sm font-medium">Bookings</span>
-                </button>
-
-                {/* Chat */}
-                <button onClick={() => navigate('/doctor/chat')} className="flex flex-col items-center gap-1">
-                    <MessageCircle size={28} />
-                    <span className="text-sm font-medium">Chat</span>
-                </button>
-
-                {/* Profile (افتراضي على أول دكتور أو حساب المستخدم) */}
-                <button onClick={() => navigate('/doctor/profile/1')} className="flex flex-col items-center gap-1">
-                    <User size={28} />
-                    <span className="text-sm font-medium">Profile</span>
-                </button>
-            </nav>
+            <DoctorBottomNav />
         </div>
     );
 } 
