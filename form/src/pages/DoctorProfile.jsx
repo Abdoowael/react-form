@@ -68,7 +68,7 @@ export default function DoctorProfile() {
                 </div>
 
                 {location.state?.bookedDate && location.state?.bookedTime && (
-                    <div className="bg-green-50 border border-green-200 rounded-2xl p-4 mb-8 relative overflow-hidden">
+                    <div className="bg-green-50 border mb-30 border-green-200 rounded-2xl p-4 mb-8 relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
                         <h3 className="font-bold text-green-800 text-lg mb-1 flex items-center gap-2">
                             <span>✅</span> Appointment Confirmed!
