@@ -1,60 +1,86 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ArrowRight, Search, Check, Menu } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { ArrowRight, Search, Check, Menu, FilterX } from "lucide-react";
 
-// قائمة الأعراض الموحّدة المستخرجة من ملف الأمراض
-const ALL_SYMPTOMS = [
-    // المريء
-    "حموضة",
-    "ألم أعلى البطن",
-    "ألم بالصدر",
-    "صعوبة بلع",
-    "حرقة مزمنة بالمريء",
+// الأعراض مقسمة حسب العضو لتتطابق تماماً مع بيانات الأمراض في الخطوة 3
+const SYMPTOMS_BY_ORGAN = {
+    "المريء": [
+        "حموضة",
+        "ألم أعلى البطن",
+        "ألم بالصدر",
+        "صعوبة بلع",
+        "حرقة مزمنة بالمريء",
+        "فقدان وزن غير مبرر"
+    ],
+    "المعدة": [
+        "ألم في المعدة",
+        "ألم شديد في المعدة",
+        "غثيان أو قيء",
+        "حموضة",
+        "سوء هضم",
+        "فقدان وزن غير مبرر"
+    ],
+    "الأمعاء الدقيقة": [
+        "إسهال متكرر",
+        "فقدان وزن غير مبرر",
+        "انتفاخ البطن",
+        "كثرة الغازات",
+        "ألم بطن",
+        "نقص فيتامينات أو عناصر غذائية"
+    ],
+    "القولون": [
+        "ألم بطن",
+        "تقلصات بالبطن",
+        "إسهال دموي",
+        "إسهال متكرر أو إمساك متكرر",
+        "شعور بعدم اكتمال حركة الأمعاء",
+        "نزيف من الشرج أو مع البراز",
+        "فقدان وزن غير مبرر",
+        "انتفاخ البطن",
+        "كثرة الغازات"
+    ],
+    "الشرج": [
+        "نزيف من الشرج أو مع البراز",
+        "ألم أثناء التبرز",
+        "ألم شديد أعلى البطن",
+        "إفرازات من الشرج"
+    ],
+    "الكبد": [
+        "تعب عام وإرهاق",
+        "تورم البطن (استسقاء)",
+        "اصفرار الجلد أو العينين",
+        "ألم بطن",
+        "فقدان وزن غير مبرر"
+    ],
+    "البنكرياس": [ // دمج المرارة والبنكرياس
+        "ألم شديد أعلى البطن",
+        "ألم بالبطن بعد الأكل الدسم",
+        "ألم مزمن بالبطن",
+        "سوء هضم",
+        "اصفرار الجلد أو العينين",
+        "ألم بطن",
+        "فقدان وزن غير مبرر",
+        "نقص فيتامينات أو عناصر غذائية"
+    ]
+};
 
-    // المعدة
-    "ألم في المعدة",
-    "ألم شديد في المعدة",
-    "غثيان أو قيء",
-
-    // الأمعاء الدقيقة
-    "إسهال متكرر",
-    "فقدان وزن غير مبرر",
-    "انتفاخ البطن",
-    "كثرة الغازات",
-    "نقص فيتامينات أو عناصر غذائية",
-
-    // القولون
-    "ألم بطن",
-    "تقلصات بالبطن",
-    "إسهال دموي",
-    "إمساك متكرر",
-    "شعور بعدم اكتمال حركة الأمعاء",
-
-    // الشرج
-    "نزيف من الشرج أو مع البراز",
-    "ألم أثناء التبرز",
-    "إفرازات من الشرج",
-
-    // الكبد
-    "تعب عام وإرهاق",
-    "تورم البطن (استسقاء)",
-    "اصفرار الجلد أو العينين",
-
-    // المرارة والبنكرياس
-    "ألم شديد أعلى البطن",
-    "ألم بالبطن بعد الأكل الدسم",
-    "ألم مزمن بالبطن",
-    "سوء هضم"
-];
+// قائمة مسطحة بكل الأعراض للبحث العام بدون تكرار
+const ALL_SYMPTOMS = [...new Set(Object.values(SYMPTOMS_BY_ORGAN).flat())];
 
 function Step2Symptoms() {
     const navigate = useNavigate();
+    const location = useLocation();
+    
+    // العضو المحدد من الخريطة السابقة (إن وجد)
+    const initialOrgan = location.state?.organ || null;
+    
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+    const [activeFilter, setActiveFilter] = useState(initialOrgan);
 
-    const filteredSymptoms = ALL_SYMPTOMS.filter((symptom) =>
-        symptom.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // القائمة المعروضة تعتمد على الفلتر النشيط وكلمة البحث
+    const displayedSymptoms = (activeFilter ? SYMPTOMS_BY_ORGAN[activeFilter] || ALL_SYMPTOMS : ALL_SYMPTOMS)
+        .filter((symptom) => symptom.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const toggleSymptom = (symptom) => {
         setSelectedSymptoms((prev) =>
@@ -87,6 +113,24 @@ function Step2Symptoms() {
 
                 {/* Fixed Search Bar & Status */}
                 <div className="sticky top-[60px] bg-[#f8fafe] z-10 px-4 pt-4 pb-2 space-y-4">
+                    
+                    {/* Active Filter Badge */}
+                    {activeFilter && (
+                        <div className="flex items-center justify-between bg-white border border-blue-200 p-3 rounded-2xl shadow-sm">
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm text-gray-500">الأعراض المرتبطة بـ:</span>
+                                <span className="text-sm font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-full">{activeFilter}</span>
+                            </div>
+                            <button 
+                                onClick={() => setActiveFilter(null)}
+                                className="text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1 text-xs font-medium"
+                            >
+                                <FilterX size={14} />
+                                عرض الكل
+                            </button>
+                        </div>
+                    )}
+
                     <div className="relative">
                         <input
                             type="text"
@@ -121,7 +165,7 @@ function Step2Symptoms() {
 
                 {/* Symptoms List */}
                 <div className="px-4 py-2 space-y-3 overflow-y-auto">
-                    {filteredSymptoms.map((symptom) => {
+                    {displayedSymptoms.map((symptom) => {
                         const isSelected = selectedSymptoms.includes(symptom);
                         return (
                             <div

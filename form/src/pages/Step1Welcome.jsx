@@ -43,7 +43,7 @@ function Step1Welcome() {
             ابدأ باختيار أعراض المريض، ثم سيقترح النظام الحالات ذات الصلة...
           </p>
           <button
-            onClick={() => navigate("/step2")}
+            onClick={() => navigate("/step2-skeleton")}
             className="w-full py-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-bold rounded-2xl flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md"
           >
             بدء التقييم

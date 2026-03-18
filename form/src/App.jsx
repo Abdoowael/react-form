@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 
 // New Flow
 import Step1Welcome from "./pages/Step1Welcome";
+import Step2Skeleton from "./pages/Step2Skeleton";
 import Step2Symptoms from "./pages/Step2Symptoms";
 import Step3Conditions from "./pages/Step3Conditions";
 import Step4Result from "./pages/Step4Result";
@@ -28,6 +29,7 @@ function App() {
 
         {/* New 5-Step Flow */}
         <Route path="/step1" element={<Step1Welcome />} />
+        <Route path="/step2-skeleton" element={<Step2Skeleton />} />
         <Route path="/step2" element={<Step2Symptoms />} />
         <Route path="/step3" element={<Step3Conditions />} />
         <Route path="/step4" element={<Step4Result />} />
