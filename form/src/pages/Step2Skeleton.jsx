@@ -14,6 +14,37 @@ const ORGANS = [
   { id: "rectum", name: "الشرج", description: "الجزء الأخير لتخزين وطرح الفضلات" },
 ];
 
+const ORGAN_POSITIONS = {
+  esophagus: {
+    btn: "top-[2%] right-[2%]",
+    line: { x1: "88%", y1: "5%", x2: "50%", y2: "8%" },
+  },
+  liver: {
+    btn: "top-[22%] right-[2%]",
+    line: { x1: "88%", y1: "25%", x2: "64%", y2: "27%" },
+  },
+  colon: {
+    btn: "top-[48%] right-[2%]",
+    line: { x1: "88%", y1: "51%", x2: "62%", y2: "53%" },
+  },
+  rectum: {
+    btn: "top-[78%] right-[2%]",
+    line: { x1: "88%", y1: "81%", x2: "50%", y2: "85%" },
+  },
+  stomach: {
+    btn: "top-[26%] left-[2%]",
+    line: { x1: "12%", y1: "30%", x2: "36%", y2: "30%" },
+  },
+  pancreas: {
+    btn: "top-[41%] left-[2%]",
+    line: { x1: "12%", y1: "45%", x2: "41%", y2: "44%" },
+  },
+  small_intestine: {
+    btn: "top-[58%] left-[2%]",
+    line: { x1: "12%", y1: "62%", x2: "45%", y2: "60%" },
+  },
+};
+
 function Step2Skeleton() {
   const navigate = useNavigate();
   const [hoveredOrgan, setHoveredOrgan] = useState(null);
@@ -46,162 +77,117 @@ function Step2Skeleton() {
             </p>
         </div>
 
-        {/* 3D Container for "Skeleton" */}
-        <div 
-          className="relative w-full max-w-[340px] aspect-[3/4] perspective-1000 mx-auto"
-          style={{ perspective: "1000px" }}
-        >
-          {/* Main 3D wrapper that rotates slightly to look like a floating object */}
+        {/* 3D Container for "Skeleton" with External Arrows */}
+        <div className="relative w-full max-w-[400px] h-[480px] mx-auto mb-6">
+          
+          {/* SVG Arrows Overlay */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
+            {ORGANS.map(organ => {
+                const pos = ORGAN_POSITIONS[organ.id];
+                const isHovered = hoveredOrgan?.id === organ.id;
+                return (
+                  <g key={`line-${organ.id}`} className={`transition-all duration-300 ${isHovered ? "opacity-100" : "opacity-40"}`}>
+                    <line 
+                        x1={pos.line.x1} y1={pos.line.y1} x2={pos.line.x2} y2={pos.line.y2}
+                        stroke={isHovered ? "#2563eb" : "#64748b"}
+                        strokeWidth={isHovered ? "2.5" : "1.5"}
+                        strokeDasharray={isHovered ? "none" : "4 4"}
+                    />
+                    <circle 
+                        cx={pos.line.x2} cy={pos.line.y2} r={isHovered ? "4" : "3"}
+                        fill={isHovered ? "#2563eb" : "#64748b"}
+                        className="transition-all duration-300"
+                    />
+                    <circle 
+                        cx={pos.line.x1} cy={pos.line.y1} r="2"
+                        fill={isHovered ? "#2563eb" : "#64748b"}
+                        className="transition-all duration-300"
+                    />
+                  </g>
+                );
+            })}
+          </svg>
+
+          {/* Background Skeleton Image Container */}
           <div 
-            className="w-full h-full relative transition-transform duration-500 ease-out transform-style-preserve-3d flex items-center justify-center p-4 rounded-3xl"
-            style={{ 
-              transform: hoveredOrgan ? "rotateX(2deg) rotateY(-2deg) scale(1.02)" : "rotateX(0deg) rotateY(0deg) scale(1)",
-              transformStyle: "preserve-3d"
-            }}
+            className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[180px] perspective-1000 z-0"
           >
-            {/* Background Image Container */}
-            <div className="absolute inset-0 z-0 bg-blue-900/40 rounded-[40px] shadow-inner overflow-hidden flex items-center justify-center border border-white/20">
+             <div 
+               className="w-full h-full relative transition-transform duration-500 ease-out transform-style-preserve-3d flex items-center justify-center rounded-[40px] shadow-inner bg-blue-900/40 border border-white/20 overflow-hidden"
+               style={{ 
+                 transform: hoveredOrgan ? "rotateX(2deg) rotateY(-2deg) scale(1.02)" : "rotateX(0deg) rotateY(0deg) scale(1)",
+                 transformStyle: "preserve-3d"
+               }}
+             >
                 <img 
                     src={skeletonImg} 
                     alt="Digestive System 3D" 
-                    className={`w-full h-full object-cover scale-110 mix-blend-screen rounded-[40px] transition-all duration-500 ease-in-out ${hoveredOrgan ? "opacity-30 blur-[1px]" : "opacity-90 blur-0"}`} 
+                    className={`w-full h-full object-cover scale-110 mix-blend-screen transition-all duration-500 ease-in-out ${hoveredOrgan ? "opacity-30 blur-[1px]" : "opacity-90 blur-0"}`} 
                 />
                 <div className="absolute inset-x-8 inset-y-12 bg-blue-500/20 blur-[80px] -z-10 rounded-full"></div>
                 
-                {/* Organ Highlight Overlay Shapes */}
+                {/* Organ Glowing Spots */}
                 <div className="absolute inset-0 z-10 pointer-events-none">
                     {/* Esophagus Glow */}
                     <div 
                         className={`absolute top-[5%] left-1/2 -translate-x-[50%] w-6 h-28 rounded-full bg-pink-400/60 blur-md transition-all duration-300
                         ${hoveredOrgan?.id === "esophagus" ? "opacity-100 scale-110" : "opacity-0"}`}
                     />
-                    
                     {/* Liver Glow */}
                     <div 
                         className={`absolute top-[25%] right-[15%] w-32 h-20 rounded-[50%_50%_50%_20%] bg-orange-500/60 blur-lg transition-all duration-300
                         ${hoveredOrgan?.id === "liver" ? "opacity-100 scale-110" : "opacity-0"}`}
                     />
-
                     {/* Stomach Glow */}
                     <div 
                         className={`absolute top-[28%] left-[10%] w-24 h-16 rounded-[40%_60%_60%_40%] bg-red-500/60 blur-lg transition-all duration-300
                         ${hoveredOrgan?.id === "stomach" ? "opacity-100 scale-110" : "opacity-0"}`}
                     />
-
                     {/* Pancreas Glow */}
                     <div 
                         className={`absolute top-[42%] left-[25%] w-20 h-6 rounded-full bg-yellow-400/70 blur-md transition-all duration-300
                         ${hoveredOrgan?.id === "pancreas" ? "opacity-100 scale-110" : "opacity-0"}`}
                     />
-
                     {/* Colon Glow */}
                     <div 
                         className={`absolute top-[48%] left-1/2 -translate-x-[50%] w-44 h-36 border-[20px] border-green-500/50 rounded-[40px] border-b-0 blur-lg transition-all duration-300
                         ${hoveredOrgan?.id === "colon" ? "opacity-100 scale-105" : "opacity-0"}`}
                     />
-
                     {/* Small Intestine Glow */}
                     <div 
                         className={`absolute top-[55%] left-1/2 -translate-x-[50%] w-28 h-20 rounded-full bg-cyan-400/60 blur-lg transition-all duration-300
                         ${hoveredOrgan?.id === "small_intestine" ? "opacity-100 scale-110" : "opacity-0"}`}
                     />
-
                     {/* Rectum Glow */}
                     <div 
                         className={`absolute bottom-[10%] left-1/2 -translate-x-[50%] w-8 h-12 rounded-full bg-purple-500/60 blur-md transition-all duration-300
                         ${hoveredOrgan?.id === "rectum" ? "opacity-100 scale-110" : "opacity-0"}`}
                     />
                 </div>
-            </div>
-            
-            {/* Interactive Data Points (Pill Buttons) placed roughly around the image */}
-            <div className="w-full h-full absolute inset-0 z-10 pointer-events-none">
-                
-                {/* Esophagus (Top Center) */}
-                <button 
-                   onClick={() => handleOrganClick(ORGANS.find(o => o.id === "esophagus"))}
-                   onMouseEnter={() => setHoveredOrgan(ORGANS.find(o => o.id === "esophagus"))}
-                   onMouseLeave={() => setHoveredOrgan(null)}
-                   className={`absolute top-[8%] left-1/2 -translate-x-1/2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 shadow-lg backdrop-blur-md border border-white/50 pointer-events-auto
-                   ${hoveredOrgan?.id === "esophagus" ? "bg-blue-600 text-white scale-110 shadow-blue-400/50" : "bg-white/80 text-blue-900 hover:scale-105"}`}
-                   style={{ transform: "translateZ(30px) translateX(-50%)" }}
-                >
-                    المريء
-                </button>
-                
-                {/* Liver (Top Right) */}
-                <button 
-                   onClick={() => handleOrganClick(ORGANS.find(o => o.id === "liver"))}
-                   onMouseEnter={() => setHoveredOrgan(ORGANS.find(o => o.id === "liver"))}
-                   onMouseLeave={() => setHoveredOrgan(null)}
-                   className={`absolute top-[28%] right-[10%] px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 shadow-lg backdrop-blur-md border border-white/50 pointer-events-auto
-                   ${hoveredOrgan?.id === "liver" ? "bg-blue-600 text-white scale-110 shadow-blue-400/50" : "bg-white/80 text-blue-900 hover:scale-105"}`}
-                   style={{ transform: "translateZ(30px)" }}
-                >
-                    الكبد
-                </button>
-                
-                {/* Stomach (Top Left) */}
-                <button 
-                   onClick={() => handleOrganClick(ORGANS.find(o => o.id === "stomach"))}
-                   onMouseEnter={() => setHoveredOrgan(ORGANS.find(o => o.id === "stomach"))}
-                   onMouseLeave={() => setHoveredOrgan(null)}
-                   className={`absolute top-[32%] left-[5%] px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 shadow-lg backdrop-blur-md border border-white/50 pointer-events-auto
-                   ${hoveredOrgan?.id === "stomach" ? "bg-blue-600 text-white scale-110 shadow-blue-400/50" : "bg-white/80 text-blue-900 hover:scale-105"}`}
-                   style={{ transform: "translateZ(30px)" }}
-                >
-                    المعدة
-                </button>
-                
-                {/* Pancreas (Middle Left) */}
-                <button 
-                   onClick={() => handleOrganClick(ORGANS.find(o => o.id === "pancreas"))}
-                   onMouseEnter={() => setHoveredOrgan(ORGANS.find(o => o.id === "pancreas"))}
-                   onMouseLeave={() => setHoveredOrgan(null)}
-                   className={`absolute top-[45%] left-[10%] px-3 py-1.5 rounded-full text-[10px] font-bold transition-all duration-300 shadow-md backdrop-blur-md border border-white/50 pointer-events-auto
-                   ${hoveredOrgan?.id === "pancreas" ? "bg-blue-600 text-white scale-110 shadow-blue-400/50" : "bg-white/80 text-blue-900 hover:scale-105"}`}
-                   style={{ transform: "translateZ(20px)" }}
-                >
-                    البنكرياس
-                </button>
-                
-                {/* Colon (Middle Right / Encompassing) */}
-                <button 
-                   onClick={() => handleOrganClick(ORGANS.find(o => o.id === "colon"))}
-                   onMouseEnter={() => setHoveredOrgan(ORGANS.find(o => o.id === "colon"))}
-                   onMouseLeave={() => setHoveredOrgan(null)}
-                   className={`absolute top-[52%] right-[5%] px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 shadow-lg backdrop-blur-md border border-white/50 pointer-events-auto
-                   ${hoveredOrgan?.id === "colon" ? "bg-blue-600 text-white scale-110 shadow-blue-400/50" : "bg-white/80 text-blue-900 hover:scale-105"}`}
-                   style={{ transform: "translateZ(30px)" }}
-                >
-                    القولون
-                </button>
-                
-                {/* Small Intestine (Lower Middle) */}
-                <button 
-                   onClick={() => handleOrganClick(ORGANS.find(o => o.id === "small_intestine"))}
-                   onMouseEnter={() => setHoveredOrgan(ORGANS.find(o => o.id === "small_intestine"))}
-                   onMouseLeave={() => setHoveredOrgan(null)}
-                   className={`absolute top-[65%] left-1/2 -translate-x-1/2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 shadow-lg backdrop-blur-md border border-white/50 pointer-events-auto
-                   ${hoveredOrgan?.id === "small_intestine" ? "bg-blue-600 text-white scale-110 shadow-blue-400/50" : "bg-white/80 text-blue-900 hover:scale-105"}`}
-                   style={{ transform: "translateZ(40px) translateX(-50%)" }}
-                >
-                    الأمعاء الدقيقة
-                </button>
-                
-                {/* Rectum (Bottom Center) */}
-                <button 
-                   onClick={() => handleOrganClick(ORGANS.find(o => o.id === "rectum"))}
-                   onMouseEnter={() => setHoveredOrgan(ORGANS.find(o => o.id === "rectum"))}
-                   onMouseLeave={() => setHoveredOrgan(null)}
-                   className={`absolute bottom-[10%] left-1/2 -translate-x-1/2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 shadow-lg backdrop-blur-md border border-white/50 pointer-events-auto
-                   ${hoveredOrgan?.id === "rectum" ? "bg-blue-600 text-white scale-110 shadow-blue-400/50" : "bg-white/80 text-blue-900 hover:scale-105"}`}
-                   style={{ transform: "translateZ(30px) translateX(-50%)" }}
-                >
-                    الشرج
-                </button>
-            </div>
+             </div>
           </div>
+          
+          {/* Interactive Buttons outside the Skeleton */}
+          <div className="absolute inset-0 z-20 pointer-events-none">
+             {ORGANS.map(organ => {
+                 const pos = ORGAN_POSITIONS[organ.id];
+                 const isHovered = hoveredOrgan?.id === organ.id;
+                 return (
+                     <button 
+                       key={`btn-${organ.id}`}
+                       onClick={() => setHoveredOrgan(organ)}
+                       onDoubleClick={() => handleOrganClick(organ)}
+                       onMouseEnter={() => setHoveredOrgan(organ)}
+                       className={`absolute px-3 py-2 min-w-[70px] rounded-xl text-[11px] font-bold transition-all duration-300 shadow-md backdrop-blur-md border pointer-events-auto flex items-center justify-center
+                       ${isHovered ? "bg-blue-600 text-white scale-110 shadow-blue-400/50 border-blue-500 z-30" : "bg-white/95 text-blue-900 hover:scale-105 border-white z-10"}
+                       ${pos.btn}`}
+                    >
+                        {organ.name}
+                    </button>
+                 );
+             })}
+          </div>
+
         </div>
 
         {/* Dynamic Details Card */}
