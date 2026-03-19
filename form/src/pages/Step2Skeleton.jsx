@@ -86,20 +86,20 @@ function Step2Skeleton() {
                 const pos = ORGAN_POSITIONS[organ.id];
                 const isHovered = hoveredOrgan?.id === organ.id;
                 return (
-                  <g key={`line-${organ.id}`} className={`transition-all duration-300 ${isHovered ? "opacity-100" : "opacity-40"}`}>
+                  <g key={`line-${organ.id}`} className={`transition-all duration-300 ${isHovered ? "opacity-100 drop-shadow-[0_0_8px_rgba(37,99,235,0.8)]" : "opacity-40"}`}>
                     <line 
                         x1={pos.line.x1} y1={pos.line.y1} x2={pos.line.x2} y2={pos.line.y2}
                         stroke={isHovered ? "#2563eb" : "#64748b"}
-                        strokeWidth={isHovered ? "2.5" : "1.5"}
+                        strokeWidth={isHovered ? "3" : "1.5"}
                         strokeDasharray={isHovered ? "none" : "4 4"}
                     />
                     <circle 
-                        cx={pos.line.x2} cy={pos.line.y2} r={isHovered ? "4" : "3"}
+                        cx={pos.line.x2} cy={pos.line.y2} r={isHovered ? "5" : "3"}
                         fill={isHovered ? "#2563eb" : "#64748b"}
                         className="transition-all duration-300"
                     />
                     <circle 
-                        cx={pos.line.x1} cy={pos.line.y1} r="2"
+                        cx={pos.line.x1} cy={pos.line.y1} r={isHovered ? "3" : "2"}
                         fill={isHovered ? "#2563eb" : "#64748b"}
                         className="transition-all duration-300"
                     />
@@ -127,41 +127,41 @@ function Step2Skeleton() {
                 <div className="absolute inset-x-8 inset-y-12 bg-blue-500/20 blur-[80px] -z-10 rounded-full"></div>
                 
                 {/* Organ Glowing Spots */}
-                <div className="absolute inset-0 z-10 pointer-events-none">
+                <div className="absolute inset-0 z-10 pointer-events-none mix-blend-screen">
                     {/* Esophagus Glow */}
                     <div 
-                        className={`absolute top-[5%] left-1/2 -translate-x-[50%] w-6 h-28 rounded-full bg-pink-400/60 blur-md transition-all duration-300
-                        ${hoveredOrgan?.id === "esophagus" ? "opacity-100 scale-110" : "opacity-0"}`}
+                        className={`absolute top-[5%] left-1/2 -translate-x-[50%] w-6 h-28 rounded-full bg-pink-400/90 blur-md shadow-[0_0_30px_10px_rgba(244,114,182,0.6)] transition-all duration-300
+                        ${hoveredOrgan?.id === "esophagus" ? "opacity-100 scale-125" : "opacity-0"}`}
                     />
                     {/* Liver Glow */}
                     <div 
-                        className={`absolute top-[25%] right-[15%] w-32 h-20 rounded-[50%_50%_50%_20%] bg-orange-500/60 blur-lg transition-all duration-300
-                        ${hoveredOrgan?.id === "liver" ? "opacity-100 scale-110" : "opacity-0"}`}
+                        className={`absolute top-[25%] right-[15%] w-32 h-20 rounded-[50%_50%_50%_20%] bg-orange-400/90 blur-lg shadow-[0_0_40px_15px_rgba(251,146,60,0.6)] transition-all duration-300
+                        ${hoveredOrgan?.id === "liver" ? "opacity-100 scale-125" : "opacity-0"}`}
                     />
                     {/* Stomach Glow */}
                     <div 
-                        className={`absolute top-[28%] left-[10%] w-24 h-16 rounded-[40%_60%_60%_40%] bg-red-500/60 blur-lg transition-all duration-300
-                        ${hoveredOrgan?.id === "stomach" ? "opacity-100 scale-110" : "opacity-0"}`}
+                        className={`absolute top-[28%] left-[10%] w-24 h-16 rounded-[40%_60%_60%_40%] bg-red-400/90 blur-lg shadow-[0_0_40px_15px_rgba(248,113,113,0.6)] transition-all duration-300
+                        ${hoveredOrgan?.id === "stomach" ? "opacity-100 scale-125" : "opacity-0"}`}
                     />
                     {/* Pancreas Glow */}
                     <div 
-                        className={`absolute top-[42%] left-[25%] w-20 h-6 rounded-full bg-yellow-400/70 blur-md transition-all duration-300
-                        ${hoveredOrgan?.id === "pancreas" ? "opacity-100 scale-110" : "opacity-0"}`}
+                        className={`absolute top-[42%] left-[25%] w-20 h-6 rounded-full bg-yellow-300/90 blur-md shadow-[0_0_30px_10px_rgba(253,224,71,0.6)] transition-all duration-300
+                        ${hoveredOrgan?.id === "pancreas" ? "opacity-100 scale-125" : "opacity-0"}`}
                     />
                     {/* Colon Glow */}
                     <div 
-                        className={`absolute top-[48%] left-1/2 -translate-x-[50%] w-44 h-36 border-[20px] border-green-500/50 rounded-[40px] border-b-0 blur-lg transition-all duration-300
-                        ${hoveredOrgan?.id === "colon" ? "opacity-100 scale-105" : "opacity-0"}`}
+                        className={`absolute top-[48%] left-1/2 -translate-x-[50%] w-44 h-36 border-[20px] border-green-400/90 rounded-[40px] border-b-0 blur-lg drop-shadow-[0_0_20px_rgba(74,222,128,0.8)] transition-all duration-300
+                        ${hoveredOrgan?.id === "colon" ? "opacity-100 scale-110" : "opacity-0"}`}
                     />
                     {/* Small Intestine Glow */}
                     <div 
-                        className={`absolute top-[55%] left-1/2 -translate-x-[50%] w-28 h-20 rounded-full bg-cyan-400/60 blur-lg transition-all duration-300
-                        ${hoveredOrgan?.id === "small_intestine" ? "opacity-100 scale-110" : "opacity-0"}`}
+                        className={`absolute top-[55%] left-1/2 -translate-x-[50%] w-28 h-20 rounded-full bg-cyan-300/90 blur-lg shadow-[0_0_40px_15px_rgba(103,232,249,0.6)] transition-all duration-300
+                        ${hoveredOrgan?.id === "small_intestine" ? "opacity-100 scale-125" : "opacity-0"}`}
                     />
                     {/* Rectum Glow */}
                     <div 
-                        className={`absolute bottom-[10%] left-1/2 -translate-x-[50%] w-8 h-12 rounded-full bg-purple-500/60 blur-md transition-all duration-300
-                        ${hoveredOrgan?.id === "rectum" ? "opacity-100 scale-110" : "opacity-0"}`}
+                        className={`absolute bottom-[10%] left-1/2 -translate-x-[50%] w-8 h-12 rounded-full bg-purple-400/90 blur-md shadow-[0_0_30px_10px_rgba(192,132,252,0.6)] transition-all duration-300
+                        ${hoveredOrgan?.id === "rectum" ? "opacity-100 scale-125" : "opacity-0"}`}
                     />
                 </div>
              </div>
@@ -179,7 +179,7 @@ function Step2Skeleton() {
                        onDoubleClick={() => handleOrganClick(organ)}
                        onMouseEnter={() => setHoveredOrgan(organ)}
                        className={`absolute px-3 py-2 min-w-[70px] rounded-xl text-[11px] font-bold transition-all duration-300 shadow-md backdrop-blur-md border pointer-events-auto flex items-center justify-center
-                       ${isHovered ? "bg-blue-600 text-white scale-110 shadow-blue-400/50 border-blue-500 z-30" : "bg-white/95 text-blue-900 hover:scale-105 border-white z-10"}
+                       ${isHovered ? "bg-blue-600 text-white scale-110 shadow-[0_0_25px_rgba(37,99,235,0.8)] border-blue-400 z-30" : "bg-white/95 text-blue-900 hover:scale-105 border-white z-10"}
                        ${pos.btn}`}
                     >
                         {organ.name}
