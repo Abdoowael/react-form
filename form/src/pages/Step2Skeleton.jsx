@@ -178,8 +178,8 @@ function Step2Skeleton() {
                        onClick={() => setHoveredOrgan(organ)}
                        onDoubleClick={() => handleOrganClick(organ)}
                        onMouseEnter={() => setHoveredOrgan(organ)}
-                       className={`absolute px-3 py-2 min-w-[70px] rounded-xl text-[11px] font-bold transition-all duration-300 shadow-md backdrop-blur-md border pointer-events-auto flex items-center justify-center
-                       ${isHovered ? "bg-blue-600 text-white scale-110 shadow-[0_0_25px_rgba(37,99,235,0.8)] border-blue-400 z-30" : "bg-white/95 text-blue-900 hover:scale-105 border-white z-10"}
+                       className={`absolute px-3 py-2 min-w-[70px] rounded-xl text-[11px] font-bold transition-all duration-300 shadow-sm backdrop-blur-md border pointer-events-auto flex items-center justify-center
+                       ${isHovered ? "bg-blue-500/80 text-white scale-110 shadow-[0_0_15px_rgba(59,130,246,0.4)] border-blue-300/50 z-30" : "bg-white/50 text-blue-900 hover:scale-105 border-white/40 z-10"}
                        ${pos.btn}`}
                     >
                         {organ.name}
