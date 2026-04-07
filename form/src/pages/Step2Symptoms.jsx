@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ArrowRight, Search, Check, Menu, FilterX } from "lucide-react";
+import { 
+    ArrowRight, Search, Check, Menu, FilterX
+} from "lucide-react";
 
 const SYMPTOMS_BY_ORGAN = {
     "المريء": [
@@ -62,6 +64,10 @@ const SYMPTOMS_BY_ORGAN = {
         "نقص فيتامينات أو عناصر غذائية"
     ]
 };
+
+
+
+
 
 const ALL_SYMPTOMS = [...new Set(Object.values(SYMPTOMS_BY_ORGAN).flat())];
 
@@ -156,23 +162,20 @@ function Step2Symptoms() {
                     </div>
                 </div>
 
-                <div className="px-4 py-2 flex flex-wrap gap-2 overflow-y-auto content-start">
+                <div className="px-3 py-2 grid grid-cols-3 gap-2 overflow-y-auto content-start">
                     {displayedSymptoms.map((symptom) => {
                         const isSelected = selectedSymptoms.includes(symptom);
                         return (
                             <div
                                 key={symptom}
                                 onClick={() => toggleSymptom(symptom)}
-                                className={`flex items-center gap-2 px-3 py-2 rounded-2xl border-2 transition-all cursor-pointer select-none grow justify-center ${isSelected
-                                    ? "border-blue-500 bg-blue-50/80 shadow-sm shadow-blue-500/10"
-                                    : "border-gray-100 bg-white hover:border-blue-200"
-                                    }`}
+                                className={`flex flex-col items-center justify-center text-center p-3 rounded-lg border transition-all duration-200 cursor-pointer min-h-[90px] ${
+                                    isSelected
+                                        ? "border-[#1c4da1] bg-[#f2f6fc]"
+                                        : "border-gray-100 bg-white hover:border-blue-200"
+                                }`}
                             >
-                                <div className={`w-4 h-4 rounded-full flex items-center justify-center border-2 shrink-0 transition-colors ${isSelected ? "bg-blue-500 border-blue-500 text-white" : "border-gray-300"
-                                    }`}>
-                                    {isSelected && <Check size={10} strokeWidth={3} />}
-                                </div>
-                                <span className={`text-xs font-bold whitespace-nowrap ${isSelected ? "text-blue-900" : "text-gray-700"}`}>
+                                <span className={`text-sm leading-snug font-extrabold ${isSelected ? "text-blue-900" : "text-[#101828]"}`}>
                                     {symptom}
                                 </span>
                             </div>

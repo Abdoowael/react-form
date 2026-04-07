@@ -2,9 +2,18 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import logo from "../../public/logo.jpeg"; 
+import { useGoogleLogin } from '@react-oauth/google';
 
 function Login() {
   const navigate = useNavigate();
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      console.log('Google Sign-In Success:', codeResponse);
+      navigate("/step1");
+    },
+    onError: (error) => console.log('Google Sign-In Error:', error)
+  });
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -131,6 +140,7 @@ function Login() {
 
           <button
             type="button"
+            onClick={() => login()}
             className="w-full border rounded-full py-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition"
           >
             <img
