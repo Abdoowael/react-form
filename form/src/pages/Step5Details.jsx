@@ -9,7 +9,6 @@ function Step5Details() {
 
     return (
         <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans" dir="rtl">
-            {/* Header */}
             <header className="bg-blue-500 text-white py-4 px-4 flex items-center justify-between sticky top-0 z-10 w-full shadow-sm">
                 <h1 className="text-xl font-bold mx-auto">شرح تفصيلي</h1>
                 <button
@@ -22,7 +21,6 @@ function Step5Details() {
 
             <main className="flex-1 w-full max-w-md mx-auto p-4 space-y-5 pb-10">
 
-                {/* Logic Card */}
                 <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
                     <div className="flex items-center gap-3 mb-4 w-full justify-between">
                         <h3 className="text-lg font-bold text-blue-900">المنطق الطبي</h3>
@@ -37,7 +35,6 @@ function Step5Details() {
                     </div>
                 </div>
 
-                {/* Treatment Plan Card (Dynamic based on condition data) */}
                 {condition.treatment && (
                     <div className="bg-emerald-50 rounded-3xl p-6 shadow-sm border border-emerald-100">
                         <div className="flex items-center gap-3 mb-5 w-full justify-between">
@@ -48,7 +45,6 @@ function Step5Details() {
                         </div>
 
                         <div className="grid grid-cols-1 gap-4">
-                            {/* Treatment */}
                             <div className="bg-white p-4 rounded-2xl border border-emerald-50 flex items-start gap-4 shadow-sm hover:shadow-md transition">
                                 <div className="bg-emerald-50 p-2.5 rounded-xl text-emerald-600 shrink-0">
                                     <Pill size={22} />
@@ -59,7 +55,6 @@ function Step5Details() {
                                 </div>
                             </div>
 
-                            {/* Analysis / Endoscopy */}
                             <div className="bg-white p-4 rounded-2xl border border-emerald-50 flex items-start gap-4 shadow-sm hover:shadow-md transition">
                                 <div className="bg-blue-50 p-2.5 rounded-xl text-blue-600 shrink-0">
                                     <Microscope size={22} />
@@ -70,7 +65,6 @@ function Step5Details() {
                                 </div>
                             </div>
 
-                            {/* Surgery */}
                             <div className="bg-white p-4 rounded-2xl border border-emerald-50 flex items-start gap-4 shadow-sm hover:shadow-md transition">
                                 <div className="bg-rose-50 p-2.5 rounded-xl text-rose-600 shrink-0">
                                     <Activity size={22} />
@@ -84,7 +78,6 @@ function Step5Details() {
                     </div>
                 )}
 
-                {/* Recommendations Card */}
                 <div className="bg-red-50 rounded-3xl p-6 shadow-sm border border-red-100">
                     <div className="flex items-center gap-3 mb-4 w-full justify-between">
                         <h3 className="text-lg font-bold text-red-900">التوصيات</h3>
@@ -100,7 +93,6 @@ function Step5Details() {
                     </div>
                 </div>
 
-                {/* Disclaimer Card */}
                 <div className="bg-orange-50 rounded-3xl p-6 shadow-sm border border-orange-100">
                     <div className="flex items-center gap-3 mb-4 w-full justify-between">
                         <h3 className="text-lg font-bold text-orange-900">إخلاء مسؤولية مهم</h3>

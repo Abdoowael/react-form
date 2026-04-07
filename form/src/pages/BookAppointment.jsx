@@ -46,20 +46,9 @@ export default function BookAppointment() {
     return (
         <div className="min-h-screen bg-[#f8fafe]  flex flex-col font-sans pb-4" dir="ltr">
             <DoctorTopNav />
-            {/* Header */}
-            {/* <header className="flex items-center justify-between text-gray-800 mb-8">
-                <button onClick={() => navigate(-1)} className="flex items-center gap-2">
-                    <CalendarIcon size={24} />
-                    <span className="font-bold">Appointment Details</span>
-                </button>
-                <div className="flex gap-4">
-                    <Search size={22} className="text-gray-600" />
-                    <Heart size={22} className="text-gray-600" />
-                </div>
-            </header> */}
+
 
             <main className="flex-1 ms-4 flex flex-col">
-                {/* Doctor Info Card */}
                 <div className="bg-white rounded-3xl p-4 shadow-sm flex items-start gap-4 border border-gray-100 mb-8">
                     <img src={`https://i.pravatar.cc/150?img=${doctor.img}`} alt={doctor.name} className="w-16 h-16 rounded-full" />
                     <div className="flex-1">
@@ -75,7 +64,6 @@ export default function BookAppointment() {
                     </div>
                 </div>
 
-                {/* Choose Date */}
                 <h3 className="font-bold text-gray-800 text-lg mb-3">Choose Date</h3>
                 <div className="flex gap-3 mb-6 overflow-x-auto pb-1">
                     {DATES.map((d) => {
@@ -97,7 +85,6 @@ export default function BookAppointment() {
                     })}
                 </div>
 
-                {/* Choose Time */}
                 <h3 className="font-bold text-gray-800 text-lg mb-3">Choose Time</h3>
                 <div className="grid grid-cols-2 gap-3 mb-6">
                     {TIMES.map((t) => {
@@ -119,7 +106,6 @@ export default function BookAppointment() {
                     })}
                 </div>
 
-                {/* Summary */}
                 <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-6 text-sm text-gray-700">
                     <p className="font-semibold mb-1">Appointment summary</p>
                     <p>
@@ -136,7 +122,6 @@ export default function BookAppointment() {
                     </p>
                 </div>
 
-                {/* Message Box */}
                 <h3 className="font-bold text-gray-800 text-lg mb-4">Message</h3>
                 <textarea
                     className="w-full h-32 bg-gray-50 rounded-2xl p-4 text-sm text-gray-700 outline-none border border-transparent focus:border-blue-500 resize-none mb-auto"
@@ -145,7 +130,6 @@ export default function BookAppointment() {
                     onChange={(e) => setMessage(e.target.value)}
                 ></textarea>
 
-                {/* Next Button */}
                 <button
                     onClick={() =>
                         selectedTime && navigate(`/doctor/profile/${doctor.id}`, {

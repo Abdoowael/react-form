@@ -7,7 +7,6 @@ function Step1Welcome() {
 
   return (
     <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans" dir="rtl">
-      {/* Header */}
       <header className="bg-blue-500 text-white py-4 px-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">نظام دعم القرارات الهضمية</h1>
         <button
@@ -20,7 +19,6 @@ function Step1Welcome() {
 
       <main className="flex-1 px-4 py-6 max-w-md w-full mx-auto space-y-6">
 
-        {/* Welcome Card */}
         <div className="bg-gradient-to-br from-blue-500 to-teal-500 rounded-3xl p-6 text-white text-center shadow-lg relative overflow-hidden">
           <div className="absolute top-4 right-4 bg-white/20 p-2 rounded-2xl backdrop-blur-sm">
             <BriefcaseMedical size={32} className="text-white" />
@@ -31,7 +29,6 @@ function Step1Welcome() {
           </p>
         </div>
 
-        {/* Start Diagnosis Card */}
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold text-gray-800">بدء التشخيص</h3>
@@ -43,7 +40,7 @@ function Step1Welcome() {
             ابدأ باختيار أعراض المريض، ثم سيقترح النظام الحالات ذات الصلة...
           </p>
           <button
-            onClick={() => navigate("/step2-skeleton")}
+            onClick={() => navigate("/step2")}
             className="w-full py-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-bold rounded-2xl flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md"
           >
             بدء التقييم
@@ -59,7 +56,6 @@ function Step1Welcome() {
           </button>
         </div>
 
-        {/* How it works Card */}
         <div className="bg-[#f0f7ff] rounded-3xl p-6 border border-blue-100">
           <div className="flex items-center gap-3 mb-6">
             <div className="bg-blue-100 p-2 rounded-full text-blue-500">

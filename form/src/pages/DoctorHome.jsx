@@ -8,7 +8,7 @@ import DoctorTopNav from "../components/DoctorTopNav";
 export default function DoctorHome() {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
-    const [favorites, setFavorites] = useState([1, 3]); // Some default favorites
+    const [favorites, setFavorites] = useState([1, 3]);
     const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
     const [isSearchActive, setIsSearchActive] = useState(false);
     const searchInputRef = useRef(null);
@@ -30,7 +30,6 @@ export default function DoctorHome() {
         <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans" dir="ltr">
             <DoctorTopNav />
 
-            {/* Old Custom Header for DoctorHome Removed, use Top Nav directly */}
             <div className="flex items-center justify-between px-6 pt-6 pb-2 bg-[#f8fafe] gap-4 transition-all duration-300">
                 <div className={`items-center gap-3 transition-opacity duration-300 ${isSearchActive ? 'hidden sm:flex' : 'flex'}`}>
                     <div className="w-12 h-12 bg-orange-100 rounded-full overflow-hidden shrink-0">
@@ -79,11 +78,9 @@ export default function DoctorHome() {
             </div>
 
             <main className="flex-1 px-6 space-y-8 mt-4">
-                {/* Upcoming Appointments */}
                 <section>
                     <h2 className="text-xl font-bold text-gray-800 mb-4">Upcoming Appointments</h2>
                     <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
-                        {/* Appointment Cards */}
                         {[
                             { id: 1, name: "Jason Smith", role: "Dentist", date: "5 Oct", time: "10:30pm", img: 60, rating: 4.8 },
                             { id: 2, name: "Melisa Adam", role: "Pediatrician", date: "6 Oct", time: "09:00am", img: 45, rating: 4.9 },
@@ -111,34 +108,6 @@ export default function DoctorHome() {
                     </div>
                 </section>
 
-                {/* Categories */}
-                {/* <section>
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-xl font-bold text-gray-800">Categories</h2>
-                        <button className="text-blue-500 font-medium">See all</button>
-                    </div>
-                    <div className="grid grid-cols-4 gap-4">
-                        {[
-                            { name: 'Heart', icon: <Activity size={28} /> },
-                            { name: 'Dental', icon: <Shield size={28} /> },
-                            { name: 'Kidney', icon: <Droplet size={28} /> },
-                            { name: 'Stomach', icon: <Flame size={28} /> },
-                            { name: 'Lung', icon: <Wind size={28} /> },
-                            { name: 'Brain', icon: <Brain size={28} /> },
-                            { name: 'Mental', icon: <Users size={28} /> },
-                            { name: 'Liver', icon: <Stethoscope size={28} /> }
-                        ].map((cat, idx) => (
-                            <div key={idx} onClick={() => navigate('/doctor/list')} className="flex flex-col items-center gap-2 cursor-pointer">
-                                <div className="w-16 h-16 bg-[#eef2f9] rounded-2xl flex items-center justify-center text-gray-500 hover:bg-blue-100 hover:text-blue-600 transition">
-                                    {cat.icon}
-                                </div>
-                                <span className="text-sm font-medium text-gray-500">{cat.name}</span>
-                            </div>
-                        ))}
-                    </div>
-                </section> */}
-
-                {/* Find Doctors */}
                 <section>
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="text-xl font-bold text-gray-800">
@@ -147,7 +116,6 @@ export default function DoctorHome() {
                         <button onClick={() => navigate('/doctor/list')} className="text-blue-500 font-medium">See all</button>
                     </div>
                     <div className="space-y-4">
-                        {/* Doctor Cards */}
                         {filteredDoctors.length > 0 ? (
                             filteredDoctors.map(doc => (
                                 <div key={doc.id} className="bg-white rounded-3xl p-4 shadow-sm flex flex-col gap-4 border border-gray-100">

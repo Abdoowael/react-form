@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowRight, Search, Check, Menu, FilterX } from "lucide-react";
 
-// الأعراض مقسمة حسب العضو لتتطابق تماماً مع بيانات الأمراض في الخطوة 3
 const SYMPTOMS_BY_ORGAN = {
     "المريء": [
         "حموضة",
@@ -52,7 +51,7 @@ const SYMPTOMS_BY_ORGAN = {
         "ألم بطن",
         "فقدان وزن غير مبرر"
     ],
-    "البنكرياس": [ // دمج المرارة والبنكرياس
+    "البنكرياس": [
         "ألم شديد أعلى البطن",
         "ألم بالبطن بعد الأكل الدسم",
         "ألم مزمن بالبطن",
@@ -64,21 +63,18 @@ const SYMPTOMS_BY_ORGAN = {
     ]
 };
 
-// قائمة مسطحة بكل الأعراض للبحث العام بدون تكرار
 const ALL_SYMPTOMS = [...new Set(Object.values(SYMPTOMS_BY_ORGAN).flat())];
 
 function Step2Symptoms() {
     const navigate = useNavigate();
     const location = useLocation();
     
-    // العضو المحدد من الخريطة السابقة (إن وجد)
     const initialOrgan = location.state?.organ || null;
     
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedSymptoms, setSelectedSymptoms] = useState([]);
     const [activeFilter, setActiveFilter] = useState(initialOrgan);
 
-    // القائمة المعروضة تعتمد على الفلتر النشيط وكلمة البحث
     const displayedSymptoms = (activeFilter ? SYMPTOMS_BY_ORGAN[activeFilter] || ALL_SYMPTOMS : ALL_SYMPTOMS)
         .filter((symptom) => symptom.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -93,12 +89,11 @@ function Step2Symptoms() {
     const clearAll = () => setSelectedSymptoms([]);
 
     const handleContinue = () => {
-        navigate("/step3", { state: { symptoms: selectedSymptoms } });
+        navigate("/step2-skeleton", { state: { symptoms: selectedSymptoms } });
     };
 
     return (
         <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans" dir="rtl">
-            {/* Header */}
             <header className="bg-blue-500 text-white py-4 px-4 flex items-center justify-between sticky top-0 z-10 w-full">
                 <h1 className="text-xl font-bold mx-auto">تقييم الأعراض</h1>
                 <button
@@ -111,10 +106,8 @@ function Step2Symptoms() {
 
             <main className="flex-1 w-full max-w-md mx-auto flex flex-col relative pb-24">
 
-                {/* Fixed Search Bar & Status */}
                 <div className="sticky top-[60px] bg-[#f8fafe] z-10 px-4 pt-4 pb-2 space-y-4">
                     
-                    {/* Active Filter Badge */}
                     {activeFilter && (
                         <div className="flex items-center justify-between bg-white border border-blue-200 p-3 rounded-2xl shadow-sm">
                             <div className="flex items-center gap-2">
@@ -163,40 +156,31 @@ function Step2Symptoms() {
                     </div>
                 </div>
 
-                {/* Symptoms List */}
-                <div className="px-4 py-2 space-y-3 overflow-y-auto">
+                <div className="px-4 py-2 flex flex-wrap gap-2.5 overflow-y-auto content-start">
                     {displayedSymptoms.map((symptom) => {
                         const isSelected = selectedSymptoms.includes(symptom);
                         return (
                             <div
                                 key={symptom}
                                 onClick={() => toggleSymptom(symptom)}
-                                className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all cursor-pointer ${isSelected
-                                    ? "border-blue-500 bg-blue-50/30"
+                                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border-2 transition-all cursor-pointer select-none ${isSelected
+                                    ? "border-blue-500 bg-blue-50/80 shadow-sm shadow-blue-500/10"
                                     : "border-gray-100 bg-white hover:border-blue-200"
                                     }`}
                             >
-                                <div className="flex items-center gap-4 flex-1">
-                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 shrink-0 ${isSelected ? "bg-blue-500 border-blue-500 text-white" : "border-gray-300"
-                                        }`}>
-                                        {isSelected && <Check size={14} strokeWidth={3} />}
-                                    </div>
-                                    <span className={`text-sm font-medium ${isSelected ? "text-blue-900" : "text-gray-700"}`}>
-                                        {symptom}
-                                    </span>
+                                <div className={`w-5 h-5 rounded-full flex items-center justify-center border-2 shrink-0 transition-colors ${isSelected ? "bg-blue-500 border-blue-500 text-white" : "border-gray-300"
+                                    }`}>
+                                    {isSelected && <Check size={12} strokeWidth={3} />}
                                 </div>
-                                {isSelected && (
-                                    <span className="px-3 py-1 bg-linear-to-r from-teal-500 to-blue-500 text-white text-xs font-bold rounded-lg shrink-0">
-                                        محدد
-                                    </span>
-                                )}
+                                <span className={`text-sm font-bold ${isSelected ? "text-blue-900" : "text-gray-700"}`}>
+                                    {symptom}
+                                </span>
                             </div>
                         );
                     })}
                 </div>
             </main>
 
-            {/* Fixed Bottom Action Bar */}
             <div className="fixed bottom-0 left-0 right-0 p-4 bg-linear-to-t from-[#f8fafe] via-[#f8fafe] to-transparent w-full">
                 <div className="max-w-md mx-auto">
                     <button

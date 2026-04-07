@@ -19,7 +19,6 @@ export default function DoctorProfile() {
     return (
         <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans pb-4" dir="ltr">
             <DoctorTopNav />
-            {/* Header Image & Actions */}
             <header className="flex items-center justify-between px-6 text-white absolute w-full top-6 z-10">
                 <button onClick={() => navigate(-1)} className="flex items-center gap-2">
                     <ArrowLeft size={24} />
@@ -31,13 +30,10 @@ export default function DoctorProfile() {
                 </div>
             </header>
 
-            {/* Doctor Image Area */}
             <div className="h-72 w-full flex items-end justify-center pt-16 relative">
-                {/* Decorative background wave could go here */}
                 <img src={`https://i.pravatar.cc/300?img=${doctor.img}`} alt={doctor.name} className="h-64 object-contain" />
             </div>
 
-            {/* Info Card */}
             <main className="flex-1 bg-white rounded-t-[2.5rem] p-8 pb-32 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.3)] flex flex-col relative z-20">
                 <div className="flex justify-between items-start mb-6">
                     <div>
@@ -49,7 +45,6 @@ export default function DoctorProfile() {
                     </div>
                 </div>
 
-                {/* Stats */}
                 <div className="flex justify-between items-center mb-8 border-y border-gray-100 py-6">
                     <div className="text-center flex-1">
                         <p className="text-2xl font-bold text-gray-800">15yr</p>
@@ -79,28 +74,7 @@ export default function DoctorProfile() {
                     </div>
                 )}
 
-                {/* Date Selection */}
-                {/* <h3 className="font-bold text-lg text-gray-800 mb-4">Select Date</h3>
-                <div className="flex gap-4 mb-8">
-                    <select className="flex-1 bg-gray-50 rounded-2xl py-4 flex items-center justify-between px-4 text-gray-500 outline-none border border-transparent focus:border-blue-500">
-                        <option>8</option>
-                        <option>9</option>
-                    </select>
-                    <select className="flex-1 bg-gray-50 rounded-2xl py-4 flex items-center justify-between px-4 text-gray-500 outline-none border border-transparent focus:border-blue-500">
-                        <option>October, Sun</option>
-                        <option>October, Mon</option>
-                    </select>
-                </div> */}
-
-                {/* Schedules */}
-                {/* <h3 className="font-bold text-lg text-gray-800 mb-4">Schedules</h3>
-                <div className="grid grid-cols-2 gap-4 mb-20">
-                    {['10:30am - 11:30am', '11:30am - 12:30pm', '12:30pm - 1:30pm', '2:30am - 3:30pm', '3:30am - 4:30pm', '4:30am - 5:30pm'].map((time, idx) => (
-                        <div key={time} className={`py-4 rounded-2xl text-center text-sm font-medium border cursor-pointer transition ${idx === 3 ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-50 text-gray-500 border-gray-100 hover:border-blue-300'}`}>
-                            {time}
-                        </div>
-                    ))}
-                </div> */}
+      
 
                 <div className="fixed bottom-[88px] left-0 w-full bg-white p-6 pb-6 border-t border-gray-100 z-40 rounded-t-3xl shadow-[0_-10px_20px_-15px_rgba(0,0,0,0.1)]">
                     <button

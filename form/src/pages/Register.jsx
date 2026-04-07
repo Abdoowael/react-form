@@ -17,7 +17,6 @@ function Register() {
 
   const [errors, setErrors] = useState({});
 
-  // validation
   const validate = () => {
     const newErrors = {};
 
@@ -54,7 +53,6 @@ function Register() {
 
       <div className="w-full max-w-sm bg-white rounded-3xl p-6 shadow-md">
 
-        {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <img src={logo} className="w-20 mb-2" />
           <h1 className="text-xl font-semibold text-blue-600">
@@ -64,7 +62,6 @@ function Register() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
 
-          {/* Username */}
           <div>
             <div className="relative">
               <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -90,7 +87,6 @@ function Register() {
             )}
           </div>
 
-          {/* Email */}
           <div>
             <div className="relative">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -116,7 +112,6 @@ function Register() {
             )}
           </div>
 
-          {/* Password */}
           <div>
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -150,7 +145,6 @@ function Register() {
             )}
           </div>
 
-          {/* Register Button */}
           <button
             type="submit"
             className="w-full py-3 bg-blue-500 text-white rounded-full font-semibold text-lg hover:bg-blue-600 transition"
@@ -158,7 +152,6 @@ function Register() {
             Register
           </button>
 
-          {/* Login Link */}
           <p className="text-center text-sm text-gray-600">
             Already have an account?{" "}
             <Link to="/" className="text-blue-500 font-semibold">

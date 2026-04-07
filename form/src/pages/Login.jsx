@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
-import logo from "../../public/logo.jpeg"; // عدل المسار حسب مكان الصورة
+import logo from "../../public/logo.jpeg"; 
 
 function Login() {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ function Login() {
 
   const [errors, setErrors] = useState({});
 
-  // validation
   const validate = () => {
     const newErrors = {};
 
@@ -28,12 +27,10 @@ function Login() {
     return newErrors;
   };
 
-  // change inputs
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  // submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -50,7 +47,6 @@ function Login() {
 
       <div className="w-full max-w-sm bg-white rounded-3xl p-6 shadow-md">
 
-        {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <img src={logo} alt="logo" className="w-20 mb-2" />
           <h1 className="text-xl font-semibold text-blue-600">
@@ -60,7 +56,6 @@ function Login() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
 
-          {/* Email */}
           <div>
             <div className="relative">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -85,7 +80,6 @@ function Login() {
             )}
           </div>
 
-          {/* Password */}
           <div>
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -118,7 +112,6 @@ function Login() {
             )}
           </div>
 
-          {/* Login Button */}
           <button
             type="submit"
             className="w-full py-3 bg-blue-500 text-white rounded-full font-semibold text-lg hover:bg-blue-600 transition"
@@ -126,19 +119,16 @@ function Login() {
             Login
           </button>
 
-          {/* Forgot */}
           <p className="text-center text-sm text-gray-400 cursor-pointer">
             ?Forgot password
           </p>
 
-          {/* Divider */}
           <div className="flex items-center gap-3">
             <div className="flex-1 h-px bg-gray-300"></div>
             <span className="text-gray-400 text-sm">Or</span>
             <div className="flex-1 h-px bg-gray-300"></div>
           </div>
 
-          {/* Google */}
           <button
             type="button"
             className="w-full border rounded-full py-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition"
@@ -150,7 +140,6 @@ function Login() {
             Sign in with Google
           </button>
 
-          {/* Register */}
           <p className="text-center text-sm text-gray-500">
             Don't have an account?{" "}
             <Link to="/register" className="text-blue-500 font-semibold">

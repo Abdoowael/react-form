@@ -2,9 +2,7 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowRight, Info, ChevronLeft, BriefcaseMedical } from "lucide-react";
 
-// 
 const CONDITIONS_DATA = [
-    // أمراض المريء
     {
         id: 1,
         name: "ارتجاع المريء",
@@ -42,7 +40,6 @@ const CONDITIONS_DATA = [
         treatment: "أدوية"
     },
 
-    // أمراض المعدة
     {
         id: 5,
         name: "جرثومة المعدة",
@@ -80,7 +77,6 @@ const CONDITIONS_DATA = [
         treatment: "علاج أورام"
     },
 
-    // أمراض الأمعاء
     {
         id: 9,
         name: "مرض السيلياك",
@@ -118,7 +114,6 @@ const CONDITIONS_DATA = [
         treatment: "علاج السبب"
     },
 
-    // أمراض القولون
     {
         id: 13,
         name: "القولون العصبي",
@@ -156,7 +151,6 @@ const CONDITIONS_DATA = [
         treatment: "علاج أورام"
     },
 
-    // أمراض الشرج والمستقيم
     {
         id: 17,
         name: "البواسير",
@@ -194,7 +188,6 @@ const CONDITIONS_DATA = [
         treatment: "علاج أورام"
     },
 
-    // أمراض الكبد
     {
         id: 21,
         name: "الكبد الدهني",
@@ -232,7 +225,6 @@ const CONDITIONS_DATA = [
         treatment: "علاج أورام"
     },
 
-    // أمراض المرارة
     {
         id: 25,
         name: "حصوات المرارة",
@@ -270,7 +262,6 @@ const CONDITIONS_DATA = [
         treatment: "علاج أورام"
     },
 
-    // أمراض البنكرياس
     {
         id: 29,
         name: "التهاب البنكرياس الحاد",
@@ -314,19 +305,15 @@ function Step3Conditions() {
     const location = useLocation();
     const selectedSymptoms = location.state?.symptoms || [];
 
-    // Calculate match for each condition based on selected symptoms
     const calculatedConditions = CONDITIONS_DATA.map(condition => {
         const conditionSymptoms = condition.symptoms;
         const matchCount = conditionSymptoms.filter(s => selectedSymptoms.includes(s)).length;
 
         let matchPercentage = 0;
         if (selectedSymptoms.length > 0) {
-            // How many of the selected symptoms belong to this condition?
-            // (Alternatively, how much of this condition's profile is fulfilled. Using the latter for better logic):
             matchPercentage = Math.round((matchCount / conditionSymptoms.length) * 100);
         }
 
-        // Determine color based on match percentage
         let color = "bg-gray-400";
         let bgLight = "bg-gray-100";
         let textDark = "text-gray-700";
@@ -355,7 +342,7 @@ function Step3Conditions() {
             textDark,
             iconColor: "text-blue-500"
         };
-    }).filter(condition => condition.match > 0).sort((a, b) => b.match - a.match); // Sort so highest match is at the top
+    }).filter(condition => condition.match > 0).sort((a, b) => b.match - a.match); 
 
     const handleSelectCondition = (condition) => {
         navigate("/step4", { state: { symptoms: selectedSymptoms, condition } });
@@ -363,7 +350,6 @@ function Step3Conditions() {
 
     return (
         <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans" dir="rtl">
-            {/* Header */}
             <header className="bg-blue-500 text-white py-4 px-4 flex items-center justify-between sticky top-0 z-10 w-full shadow-sm">
                 <h1 className="text-xl font-bold mx-auto">اختر الحالة</h1>
                 <button
@@ -376,7 +362,6 @@ function Step3Conditions() {
 
             <main className="flex-1 w-full max-w-md mx-auto p-4 space-y-4">
 
-                {/* Info Banner */}
                 <div className="bg-white rounded-2xl p-4 flex items-center gap-3 shadow-sm border border-blue-50">
                     <div className="bg-blue-50 p-2 rounded-full text-blue-500 shrink-0">
                         <Info size={20} />
@@ -386,7 +371,6 @@ function Step3Conditions() {
                     </p>
                 </div>
 
-                {/* Conditions List */}
                 <div className="space-y-4 mt-6">
                     {calculatedConditions.length > 0 ? (
                         calculatedConditions.map((condition) => (
@@ -395,7 +379,6 @@ function Step3Conditions() {
                                 onClick={() => handleSelectCondition(condition)}
                                 className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-200 transition-all cursor-pointer relative overflow-hidden group"
                             >
-                                {/* Top Row: Name and Icon */}
                                 <div className="flex justify-between items-start mb-3">
                                     <div className="flex-1 ml-4">
                                         <h3 className="text-xl font-bold text-gray-800 mb-2 truncate">
@@ -421,12 +404,10 @@ function Step3Conditions() {
                                     </div>
                                 </div>
 
-                                {/* Description */}
                                 <p className="text-gray-500 text-sm leading-relaxed mb-4">
                                     {condition.description}
                                 </p>
 
-                                {/* Progress Bar Container */}
                                 <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
                                     <div
                                         className={`h-full rounded-full ${condition.color} transition-all duration-1000 ease-out`}

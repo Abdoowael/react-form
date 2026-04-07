@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Star, MapPin, Clock, Search, Heart, Filter, ArrowLeft } from "lucide-react";
+import { Search, Heart, ArrowLeft } from "lucide-react";
 import { DOCTORS } from "../data/doctors";
 import DoctorTopNav from "../components/DoctorTopNav";
 
@@ -8,14 +8,11 @@ export default function DoctorList() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Check if we came from Step 4 diagnosis result
     const condition = location.state?.condition;
 
-    // Dynamically filter and order doctors based on the condition
     const displayDoctors = useMemo(() => {
         if (!condition) return DOCTORS;
 
-        // Define prioritization logic based on likely symptom keywords
         let prioritySpec = "";
         if (condition.name.includes("معدة") || condition.name.includes("قولون")) prioritySpec = "Gastroenterology";
         else if (condition.name.includes("قلب")) prioritySpec = "Cardiology";
@@ -27,10 +24,9 @@ export default function DoctorList() {
         if (prioritySpec) {
             const matched = DOCTORS.filter(d => d.spec === prioritySpec);
             const others = DOCTORS.filter(d => d.spec !== prioritySpec);
-            // Place matched specialist in front
             return [...matched, ...others];
         }
-        return DOCTORS; // Fallback to all doctors
+        return DOCTORS;
     }, [condition]);
 
     const title = condition ? "الأطباء المقترحون" : "Available Doctors";
@@ -39,7 +35,6 @@ export default function DoctorList() {
         <div className="min-h-screen bg-[#f8fafe] flex flex-col font-sans pb-4" dir="ltr">
 
             <DoctorTopNav />
-            {/* Header */}
             <header className="flex items-center justify-between p-6 bg-white sticky top-0 z-10 border-b border-gray-100">
                 <div className="flex items-center gap-4">
                     <button onClick={() => navigate(-1)} className="text-gray-800">
@@ -57,7 +52,6 @@ export default function DoctorList() {
                 <h2 className="text-xl font-bold text-gray-800">Results</h2>
 
                 <div className="space-y-4">
-                    {/* Doctor Card */}
                     {displayDoctors.map((doc, idx) => (
                         <div key={doc.id} className="bg-white rounded-3xl p-5 shadow-sm flex flex-col gap-4 border border-gray-100">
                             <div className="flex justify-between items-start">

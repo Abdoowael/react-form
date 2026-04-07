@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowRight, Info, FileText, Home, ListChecks, CheckCircle2, XCircle } from "lucide-react";
 
 export const diseaseFoodsMapping = {
-    // أمراض المريء
     "ارتجاع المريء": {
         harmful: ["الأكل الدسم", "القهوة", "الشوكولاتة", "الأطعمة الحارة"],
         beneficial: ["الشوفان", "الموز", "الخضار المسلوق"]
@@ -20,7 +19,6 @@ export const diseaseFoodsMapping = {
         harmful: ["الكافيين", "الأطعمة القاسية"],
         beneficial: ["أطعمة خفيفة", "زبادي", "خضار"]
     },
-    // أمراض المعدة
     "جرثومة المعدة": {
         harmful: ["الأكل الحار", "المقليات", "القهوة"],
         beneficial: ["الزبادي", "العسل", "البروكلي"]
@@ -37,7 +35,6 @@ export const diseaseFoodsMapping = {
         harmful: ["اللحوم المصنعة", "الأطعمة المدخنة"],
         beneficial: ["بروتينات خفيفة", "خضروات"]
     },
-    // أمراض الأمعاء
     "السيلياك": {
         harmful: ["القمح", "الشعير", "الجلوتين"],
         beneficial: ["الأرز", "الذرة", "البطاطس"]
@@ -54,7 +51,6 @@ export const diseaseFoodsMapping = {
         harmful: ["الأطعمة المصنعة"],
         beneficial: ["أطعمة غنية بالفيتامينات"]
     },
-    // أمراض القولون
     "القولون العصبي": {
         harmful: ["الفاصوليا", "الكافيين", "الأطعمة الحارة"],
         beneficial: ["الشوفان", "الزبادي", "النعناع"]
@@ -71,7 +67,6 @@ export const diseaseFoodsMapping = {
         harmful: ["اللحوم المصنعة", "الدهون"],
         beneficial: ["الخضروات", "الفواكه", "الألياف"]
     },
-    // أمراض الشرج
     "البواسير": {
         harmful: ["الإمساك", "الأطعمة الحارة"],
         beneficial: ["الألياف", "الماء", "الخضروات"]
@@ -88,7 +83,6 @@ export const diseaseFoodsMapping = {
         harmful: ["اللحوم المصنعة"],
         beneficial: ["ألياف", "خضروات"]
     },
-    // أمراض الكبد
     "الكبد الدهني": {
         harmful: ["الدهون", "السكريات"],
         beneficial: ["الخضروات", "السمك", "زيت الزيتون"]
@@ -105,7 +99,6 @@ export const diseaseFoodsMapping = {
         harmful: ["الكحول", "الأطعمة الملوثة"],
         beneficial: ["أطعمة مغذية", "بروتين"]
     },
-    // أمراض المرارة
     "حصوات المرارة": {
         harmful: ["الدهون", "المقليات"],
         beneficial: ["خضروات", "فواكه", "ألياف"]
@@ -122,7 +115,6 @@ export const diseaseFoodsMapping = {
         harmful: ["الدهون والمقليات"],
         beneficial: ["غذاء صحي"]
     },
-    // أمراض البنكرياس
     "التهاب البنكرياس الحاد": {
         harmful: ["الكحول", "الدهون"],
         beneficial: ["أطعمة خفيفة", "سوائل"]
@@ -156,7 +148,6 @@ function Step4Result() {
     const circumference = radius * 2 * Math.PI;
     const offset = circumference - (percentage / 100) * circumference;
 
-    // الأعراض الخاصة بهذا المرض التي قام المستخدم باختيارها
     const conditionSymptoms = condition.symptoms || [];
     const matchedSymptoms = conditionSymptoms.filter((s) => symptoms.includes(s));
 
@@ -168,7 +159,7 @@ function Step4Result() {
 
     if (percentage >= 75) {
         severityLabel = "عالية";
-        severityColor = "bg-[#f05349]"; // Match screenshot exact red
+        severityColor = "bg-[#f05349]";
         strokeColor = "#f05349";
         textColor = "text-[#f05349]";
         shadowColor = "shadow-red-500/20";
@@ -182,7 +173,6 @@ function Step4Result() {
 
     return (
         <div className="min-h-screen bg-white flex flex-col font-sans" dir="rtl">
-            {/* Header */}
             <header className="bg-blue-500 text-white py-4 px-4 flex items-center justify-between sticky top-0 z-10 w-full shadow-sm">
                 <h1 className="text-xl font-bold mx-auto">نتيجة التشخيص</h1>
                 <button
@@ -195,7 +185,6 @@ function Step4Result() {
 
             <main className="flex-1 w-full max-w-md mx-auto flex flex-col">
 
-                {/* Top Section - Circular Progress */}
                 <div className="bg-linear-to-b from-[#fce4e4] to-[#fcf0f0] pt-10 pb-16 flex flex-col items-center">
                     <h2 className="text-3xl items-center font-bold text-gray-800 mb-8 px-4 text-center">{condition.name}</h2>
 
@@ -233,7 +222,6 @@ function Step4Result() {
                     </div>
                 </div>
 
-                {/* Symptoms for this condition that user selected */}
                 <div className="px-4 relative top-[-30px] z-10 w-full mb-4">
                     <div className="bg-white rounded-2xl p-6 shadow-sm border border-teal-100">
                         <div className="flex flex-row items-center gap-3 mb-4 w-full justify-start">
@@ -264,7 +252,6 @@ function Step4Result() {
                     </div>
                 </div>
 
-                {/* Foods Table for the current condition */}
                 {diseaseFoodsMapping[condition.name] && (
                     <div className="px-4 relative top-[-30px] z-10 w-full mb-6">
                         <div className="bg-white rounded-2xl p-0 shadow-md border border-gray-100 overflow-hidden">
@@ -304,7 +291,6 @@ function Step4Result() {
                     </div>
                 )}
 
-                {/* Action Buttons */}
                 <div className="space-y-4 px-4 pb-6 mt-auto">
                     <button
                         onClick={() => {
