@@ -156,23 +156,23 @@ function Step2Symptoms() {
                     </div>
                 </div>
 
-                <div className="px-4 py-2 flex flex-wrap gap-2.5 overflow-y-auto content-start">
+                <div className="px-4 py-2 flex flex-wrap gap-2 overflow-y-auto content-start">
                     {displayedSymptoms.map((symptom) => {
                         const isSelected = selectedSymptoms.includes(symptom);
                         return (
                             <div
                                 key={symptom}
                                 onClick={() => toggleSymptom(symptom)}
-                                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border-2 transition-all cursor-pointer select-none ${isSelected
+                                className={`flex items-center gap-2 px-3 py-2 rounded-2xl border-2 transition-all cursor-pointer select-none grow justify-center ${isSelected
                                     ? "border-blue-500 bg-blue-50/80 shadow-sm shadow-blue-500/10"
                                     : "border-gray-100 bg-white hover:border-blue-200"
                                     }`}
                             >
-                                <div className={`w-5 h-5 rounded-full flex items-center justify-center border-2 shrink-0 transition-colors ${isSelected ? "bg-blue-500 border-blue-500 text-white" : "border-gray-300"
+                                <div className={`w-4 h-4 rounded-full flex items-center justify-center border-2 shrink-0 transition-colors ${isSelected ? "bg-blue-500 border-blue-500 text-white" : "border-gray-300"
                                     }`}>
-                                    {isSelected && <Check size={12} strokeWidth={3} />}
+                                    {isSelected && <Check size={10} strokeWidth={3} />}
                                 </div>
-                                <span className={`text-sm font-bold ${isSelected ? "text-blue-900" : "text-gray-700"}`}>
+                                <span className={`text-xs font-bold whitespace-nowrap ${isSelected ? "text-blue-900" : "text-gray-700"}`}>
                                     {symptom}
                                 </span>
                             </div>
