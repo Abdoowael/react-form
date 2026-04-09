@@ -88,33 +88,33 @@ const StomachIcon = ({ size = 24, className, ...props }) => (
 
 const SYMPTOM_ICONS = {
     "حموضة": Flame,
-    "ألم أعلى البطن": StomachIcon,
+    "ألم أعلى البطن": Activity,
     "ألم بالصدر": HeartPulse,
     "صعوبة بلع": Frown,
     "حرقة مزمنة بالمريء": Flame,
     "فقدان وزن غير مبرر": Scale,
     "ألم في المعدة": StomachIcon,
-    "ألم شديد في المعدة": StomachIcon,
+    "ألم شديد في المعدة": AlertTriangle,
     "غثيان أو قيء": CloudRain,
-    "سوء هضم": StomachIcon,
+    "سوء هضم": Frown,
     "إسهال متكرر": Wind,
-    "انتفاخ البطن": StomachIcon,
+    "انتفاخ البطن": CircleDashed,
     "كثرة الغازات": Wind,
     "ألم بطن": StomachIcon,
     "نقص فيتامينات أو عناصر غذائية": BatteryWarning,
-    "تقلصات بالبطن": StomachIcon,
+    "تقلصات بالبطن": Zap,
     "إسهال دموي": Droplet,
     "إسهال متكرر أو إمساك متكرر": RefreshCw,
     "شعور بعدم اكتمال حركة الأمعاء": AlertCircle,
     "نزيف من الشرج أو مع البراز": Droplet,
     "ألم أثناء التبرز": AlertTriangle,
-    "ألم شديد أعلى البطن": StomachIcon,
+    "ألم شديد أعلى البطن": AlertTriangle,
     "إفرازات من الشرج": Droplets,
     "تعب عام وإرهاق": BatteryLow,
-    "تورم البطن (استسقاء)": StomachIcon,
+    "تورم البطن (استسقاء)": CircleDashed,
     "اصفرار الجلد أو العينين": Eye,
-    "ألم بالبطن بعد الأكل الدسم": StomachIcon,
-    "ألم مزمن بالبطن": StomachIcon
+    "ألم بالبطن بعد الأكل الدسم": UtensilsCrossed,
+    "ألم مزمن بالبطن": Activity
 };
 
 function Step2Symptoms() {
