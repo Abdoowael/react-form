@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { 
-    ArrowRight, Search, Check, Menu, FilterX
+    ArrowRight, Search, Check, Menu, FilterX,
+    Flame, Activity, Stethoscope, AlertTriangle, BatteryWarning, Frown,
+    CloudRain, Wind, Droplets, Zap, Droplet, RefreshCw, CircleDashed,
+    AlertCircle, Eye, UtensilsCrossed, Scale, BatteryLow, HeartPulse
 } from "lucide-react";
 
 const SYMPTOMS_BY_ORGAN = {
@@ -69,7 +72,50 @@ const SYMPTOMS_BY_ORGAN = {
 
 
 
+import logoImg from "../../public/logo.jpeg";
+
 const ALL_SYMPTOMS = [...new Set(Object.values(SYMPTOMS_BY_ORGAN).flat())];
+
+const StomachIcon = ({ size = 24, className, ...props }) => (
+    <div style={{ width: size, height: size }} className={`relative flex items-center justify-center ${className || ''}`} {...props}>
+        <img 
+            src={logoImg} 
+            alt="صورة المعدة" 
+            className="w-full h-full object-contain scale-110 mix-blend-multiply drop-shadow-sm rounded-full" 
+        />
+    </div>
+);
+
+const SYMPTOM_ICONS = {
+    "حموضة": Flame,
+    "ألم أعلى البطن": StomachIcon,
+    "ألم بالصدر": HeartPulse,
+    "صعوبة بلع": Frown,
+    "حرقة مزمنة بالمريء": Flame,
+    "فقدان وزن غير مبرر": Scale,
+    "ألم في المعدة": StomachIcon,
+    "ألم شديد في المعدة": StomachIcon,
+    "غثيان أو قيء": CloudRain,
+    "سوء هضم": StomachIcon,
+    "إسهال متكرر": Wind,
+    "انتفاخ البطن": StomachIcon,
+    "كثرة الغازات": Wind,
+    "ألم بطن": StomachIcon,
+    "نقص فيتامينات أو عناصر غذائية": BatteryWarning,
+    "تقلصات بالبطن": StomachIcon,
+    "إسهال دموي": Droplet,
+    "إسهال متكرر أو إمساك متكرر": RefreshCw,
+    "شعور بعدم اكتمال حركة الأمعاء": AlertCircle,
+    "نزيف من الشرج أو مع البراز": Droplet,
+    "ألم أثناء التبرز": AlertTriangle,
+    "ألم شديد أعلى البطن": StomachIcon,
+    "إفرازات من الشرج": Droplets,
+    "تعب عام وإرهاق": BatteryLow,
+    "تورم البطن (استسقاء)": StomachIcon,
+    "اصفرار الجلد أو العينين": Eye,
+    "ألم بالبطن بعد الأكل الدسم": StomachIcon,
+    "ألم مزمن بالبطن": StomachIcon
+};
 
 function Step2Symptoms() {
     const navigate = useNavigate();
@@ -165,17 +211,26 @@ function Step2Symptoms() {
                 <div className="px-3 py-2 grid grid-cols-3 gap-2 overflow-y-auto content-start">
                     {displayedSymptoms.map((symptom) => {
                         const isSelected = selectedSymptoms.includes(symptom);
+                        const IconComponent = SYMPTOM_ICONS[symptom] || Activity;
+                        
                         return (
                             <div
                                 key={symptom}
                                 onClick={() => toggleSymptom(symptom)}
-                                className={`flex flex-col items-center justify-center text-center p-3 rounded-lg border transition-all duration-200 cursor-pointer min-h-[90px] ${
+                                className={`flex flex-col items-center justify-center text-center p-2 rounded-lg border transition-all duration-200 cursor-pointer min-h-[120px] gap-2 ${
                                     isSelected
                                         ? "border-[#1c4da1] bg-[#f2f6fc]"
                                         : "border-gray-100 bg-white hover:border-blue-200"
                                 }`}
                             >
-                                <span className={`text-sm leading-snug font-extrabold ${isSelected ? "text-blue-900" : "text-[#101828]"}`}>
+                                <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shadow-sm shrink-0 transition-colors ${
+                                    isSelected 
+                                        ? "bg-blue-100 text-blue-700 border border-blue-200" 
+                                        : "bg-[#f8fafe] text-blue-500 border border-gray-100"
+                                }`}>
+                                    <IconComponent size={24} strokeWidth={1.8} />
+                                </div>
+                                <span className={`text-xs leading-snug font-extrabold ${isSelected ? "text-blue-900" : "text-[#101828]"}`}>
                                     {symptom}
                                 </span>
                             </div>
