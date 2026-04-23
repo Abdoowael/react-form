@@ -23,6 +23,56 @@ const ORGANS = [
   { id: "rectum", name: "الشرج", description: "الجزء الأخير لتخزين وطرح الفضلات" },
 ];
 
+const OrganIcons = {
+  esophagus: (props) => (
+    <svg viewBox="0 0 100 100" fill="currentColor" {...props}>
+      <path d="M45,5 C45,5 45,30 42,45 C38,65 42,75 42,75 C42,75 58,75 58,75 C58,75 62,65 58,45 C55,30 55,5 55,5 Z" />
+      <path d="M42,75 Q35,85 25,85 Q40,95 50,95 Q60,95 75,85 Q65,85 58,75 Z" opacity="0.3" />
+      <path d="M48,10 L48,70" stroke="white" strokeWidth="2" strokeDasharray="4 4" opacity="0.4" fill="none" />
+    </svg>
+  ),
+  stomach: (props) => (
+    <svg viewBox="0 0 100 100" fill="currentColor" {...props}>
+      <path d="M60,10 C45,10 40,30 35,45 C30,60 15,65 15,75 C15,85 25,90 40,90 C60,90 85,75 85,45 C85,25 75,10 60,10 Z" />
+      <path d="M60,20 C70,20 75,30 75,45 C75,65 55,80 40,80 C30,80 25,78 25,75 C25,70 35,65 45,55 C50,50 55,35 55,20 C55,20 60,20 60,20 Z" fill="#ffffff" opacity="0.2" />
+    </svg>
+  ),
+  liver: (props) => (
+    <svg viewBox="0 0 100 100" fill="currentColor" {...props}>
+      <path d="M15,45 C15,30 30,15 60,15 C85,15 95,25 90,50 C85,75 60,85 35,80 C15,75 15,60 15,45 Z" />
+      <path d="M35,25 C45,25 50,35 50,35 C50,35 25,35 25,45 C25,40 25,25 35,25 Z" fill="#ffffff" opacity="0.3" />
+      <path d="M60,15 L60,85" stroke="#ffffff" strokeWidth="1.5" opacity="0.2" />
+    </svg>
+  ),
+  pancreas: (props) => (
+    <svg viewBox="0 0 100 100" fill="currentColor" {...props}>
+      <path d="M25,50 C15,45 15,35 30,40 C45,45 60,40 75,35 C85,30 95,45 85,55 C70,70 55,60 40,55 C30,50 25,50 25,50 Z" />
+      <circle cx="35" cy="45" r="4" fill="#ffffff" opacity="0.4" />
+      <circle cx="50" cy="48" r="4" fill="#ffffff" opacity="0.4" />
+      <circle cx="65" cy="45" r="4" fill="#ffffff" opacity="0.4" />
+      <circle cx="75" cy="42" r="3" fill="#ffffff" opacity="0.4" />
+    </svg>
+  ),
+  small_intestine: (props) => (
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M30,30 Q50,20 70,30 Q90,40 70,50 Q50,60 30,50 Q10,40 30,30 Z M40,60 Q60,50 80,60 Q90,70 70,80 Q50,90 30,80" />
+      <path d="M30,50 Q40,60 50,60 Q50,60 70,80 M70,50 Q60,60 40,60 Q40,60 30,80" />
+    </svg>
+  ),
+  colon: (props) => (
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M20,80 L20,40 C20,20 30,15 50,15 C70,15 80,20 80,40 L80,80" />
+      <path d="M10,80 L30,80 M10,60 L30,60 M10,40 L30,40 M40,5 L40,25 M60,5 L60,25 M70,40 L90,40 M70,60 L90,60 M70,80 L90,80" strokeWidth="6" />
+    </svg>
+  ),
+  rectum: (props) => (
+    <svg viewBox="0 0 100 100" fill="currentColor" {...props}>
+      <path d="M30,15 L70,15 C75,50 65,75 55,90 C50,95 45,90 40,85 C35,75 25,50 30,15 Z" />
+      <path d="M30,15 L70,15 C70,15 65,30 50,30 C35,30 30,15 30,15 Z" fill="#ffffff" opacity="0.3" />
+    </svg>
+  ),
+};
+
 const ORGAN_POSITIONS = {
   esophagus: {
     btn: "top-[2%] right-[2%]",
@@ -41,18 +91,30 @@ const ORGAN_POSITIONS = {
     line: { x1: "88%", y1: "81%", x2: "50%", y2: "85%" },
   },
   stomach: {
-    btn: "top-[26%] left-[2%]",
-    line: { x1: "12%", y1: "30%", x2: "36%", y2: "30%" },
+    btn: "top-[20%] left-[2%]",
+    line: { x1: "12%", y1: "24%", x2: "36%", y2: "30%" },
   },
   pancreas: {
-    btn: "top-[41%] left-[2%]",
-    line: { x1: "12%", y1: "45%", x2: "41%", y2: "44%" },
+    btn: "top-[43%] left-[2%]",
+    line: { x1: "12%", y1: "47%", x2: "41%", y2: "44%" },
   },
   small_intestine: {
-    btn: "top-[58%] left-[2%]",
-    line: { x1: "12%", y1: "62%", x2: "45%", y2: "60%" },
+    btn: "top-[66%] left-[2%]",
+    line: { x1: "12%", y1: "70%", x2: "45%", y2: "60%" },
   },
 };
+
+const ORGAN_IMAGE_SRC = {
+  stomach: "/icons8-stomach-100.png",
+  liver: "/icons8-liver-64.png",
+  colon: "/icons8-colon-100.png",
+  pancreas: "/icons8-pancreas-64.png",
+  esophagus: "/icons8-anatomy-48.png",
+};
+
+function getOrganImage(organId) {
+  return ORGAN_IMAGE_SRC[organId] || `/${organId}.png`;
+}
 
 function Step2Skeleton() {
   const navigate = useNavigate();
@@ -60,6 +122,7 @@ function Step2Skeleton() {
   const selectedSymptoms = location.state?.symptoms || [];
   
   const [hoveredOrgan, setHoveredOrgan] = useState(null);
+  const [imgError, setImgError] = useState({});
 
   const getOrganPercentage = (organName) => {
       if (!selectedSymptoms || selectedSymptoms.length === 0) return 0;
@@ -147,36 +210,30 @@ function Step2Skeleton() {
                 />
                 <div className="absolute inset-x-8 inset-y-12 bg-blue-500/20 blur-[80px] -z-10 rounded-full"></div>
                 
-                <div className="absolute inset-0 z-10 pointer-events-none mix-blend-screen">
-                    <div 
-                        className={`absolute top-[5%] left-1/2 -translate-x-[50%] w-6 h-28 rounded-full bg-pink-400/90 blur-md shadow-[0_0_30px_10px_rgba(244,114,182,0.6)] transition-all duration-300
-                        ${hoveredOrgan?.id === "esophagus" ? "opacity-100 scale-125" : "opacity-0"}`}
-                    />
-                    <div 
-                        className={`absolute top-[25%] right-[15%] w-32 h-20 rounded-[50%_50%_50%_20%] bg-orange-400/90 blur-lg shadow-[0_0_40px_15px_rgba(251,146,60,0.6)] transition-all duration-300
-                        ${hoveredOrgan?.id === "liver" ? "opacity-100 scale-125" : "opacity-0"}`}
-                    />
-                    <div 
-                        className={`absolute top-[28%] left-[10%] w-24 h-16 rounded-[40%_60%_60%_40%] bg-red-400/90 blur-lg shadow-[0_0_40px_15px_rgba(248,113,113,0.6)] transition-all duration-300
-                        ${hoveredOrgan?.id === "stomach" ? "opacity-100 scale-125" : "opacity-0"}`}
-                    />
-                    <div 
-                        className={`absolute top-[42%] left-[25%] w-20 h-6 rounded-full bg-yellow-300/90 blur-md shadow-[0_0_30px_10px_rgba(253,224,71,0.6)] transition-all duration-300
-                        ${hoveredOrgan?.id === "pancreas" ? "opacity-100 scale-125" : "opacity-0"}`}
-                    />
-                    <div 
-                        className={`absolute top-[48%] left-1/2 -translate-x-[50%] w-44 h-36 border-[20px] border-green-400/90 rounded-[40px] border-b-0 blur-lg drop-shadow-[0_0_20px_rgba(74,222,128,0.8)] transition-all duration-300
-                        ${hoveredOrgan?.id === "colon" ? "opacity-100 scale-110" : "opacity-0"}`}
-                    />
-                    <div 
-                        className={`absolute top-[55%] left-1/2 -translate-x-[50%] w-28 h-20 rounded-full bg-cyan-300/90 blur-lg shadow-[0_0_40px_15px_rgba(103,232,249,0.6)] transition-all duration-300
-                        ${hoveredOrgan?.id === "small_intestine" ? "opacity-100 scale-125" : "opacity-0"}`}
-                    />
-                    <div 
-                        className={`absolute bottom-[10%] left-1/2 -translate-x-[50%] w-8 h-12 rounded-full bg-purple-400/90 blur-md shadow-[0_0_30px_10px_rgba(192,132,252,0.6)] transition-all duration-300
-                        ${hoveredOrgan?.id === "rectum" ? "opacity-100 scale-125" : "opacity-0"}`}
-                    />
+                <div className="absolute inset-0 z-10 pointer-events-none">
+                    <div className={`absolute top-[5%] left-1/2 -translate-x-[50%] w-12 h-20 text-pink-500 drop-shadow-[0_0_12px_rgba(236,72,153,0.6)] transition-all duration-300 ${hoveredOrgan?.id === "esophagus" ? "opacity-100 scale-110" : "opacity-0"}`}>
+                        {!imgError["esophagus"] ? <img src={getOrganImage("esophagus")} className="w-full h-full object-contain" /> : <OrganIcons.esophagus className="w-full h-full" />}
+                    </div>
+                    <div className={`absolute top-[25%] right-[15%] w-24 h-16 text-orange-500 drop-shadow-[0_0_12px_rgba(249,115,22,0.6)] transition-all duration-300 ${hoveredOrgan?.id === "liver" ? "opacity-100 scale-110" : "opacity-0"}`}>
+                        {!imgError["liver"] ? <img src={getOrganImage("liver")} className="w-full h-full object-contain" /> : <OrganIcons.liver className="w-full h-full" />}
+                    </div>
+                    <div className={`absolute top-[28%] left-[10%] w-20 h-20 text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.6)] transition-all duration-300 ${hoveredOrgan?.id === "stomach" ? "opacity-100 scale-110" : "opacity-0"}`}>
+                        {!imgError["stomach"] ? <img src={getOrganImage("stomach")} className="w-full h-full object-contain" /> : <OrganIcons.stomach className="w-full h-full" />}
+                    </div>
+                    <div className={`absolute top-[42%] left-[25%] w-16 h-12 text-yellow-500 drop-shadow-[0_0_12px_rgba(234,179,8,0.6)] transition-all duration-300 ${hoveredOrgan?.id === "pancreas" ? "opacity-100 scale-110" : "opacity-0"}`}>
+                        {!imgError["pancreas"] ? <img src={getOrganImage("pancreas")} className="w-full h-full object-contain" /> : <OrganIcons.pancreas className="w-full h-full" />}
+                    </div>
+                    <div className={`absolute top-[48%] left-1/2 -translate-x-[50%] w-32 h-32 text-green-500 drop-shadow-[0_0_12px_rgba(34,197,94,0.6)] transition-all duration-300 ${hoveredOrgan?.id === "colon" ? "opacity-100 scale-110" : "opacity-0"}`}>
+                        {!imgError["colon"] ? <img src={getOrganImage("colon")} className="w-full h-full object-contain" /> : <OrganIcons.colon className="w-full h-full" />}
+                    </div>
+                    <div className={`absolute top-[55%] left-1/2 -translate-x-[50%] w-24 h-20 text-cyan-400 drop-shadow-[0_0_12px_rgba(34,211,238,0.6)] transition-all duration-300 ${hoveredOrgan?.id === "small_intestine" ? "opacity-100 scale-110" : "opacity-0"}`}>
+                        {!imgError["small_intestine"] ? <img src={getOrganImage("small_intestine")} className="w-full h-full object-contain" /> : <OrganIcons.small_intestine className="w-full h-full" />}
+                    </div>
+                    <div className={`absolute bottom-[10%] left-1/2 -translate-x-[50%] w-10 h-12 text-purple-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)] transition-all duration-300 ${hoveredOrgan?.id === "rectum" ? "opacity-100 scale-110" : "opacity-0"}`}>
+                        {!imgError["rectum"] ? <img src={getOrganImage("rectum")} className="w-full h-full object-contain" /> : <OrganIcons.rectum className="w-full h-full" />}
+                    </div>
                 </div>
+
              </div>
           </div>
           
@@ -185,18 +242,38 @@ function Step2Skeleton() {
                  if (organ.percentage === 0) return null;
                  const pos = ORGAN_POSITIONS[organ.id];
                  const isHovered = hoveredOrgan?.id === organ.id;
+                 const OrganIcon = OrganIcons[organ.id];
+                 const hasError = imgError[organ.id];
                  return (
                      <button 
                        key={`btn-${organ.id}`}
                        onClick={() => setHoveredOrgan(organ)}
                        onMouseEnter={() => setHoveredOrgan(organ)}
-                       className={`absolute px-3 py-2 min-w-[70px] rounded-xl text-[11px] font-bold transition-all duration-300 shadow-sm backdrop-blur-md border pointer-events-auto flex flex-col items-center justify-center
-                       ${isHovered ? "bg-blue-500/90 text-white scale-110 shadow-[0_0_15px_rgba(59,130,246,0.4)] border-blue-300/50 z-30" : "bg-white/80 text-blue-900 hover:scale-105 border-blue-200 z-10"}
+                       className={`absolute pointer-events-auto flex flex-col items-center justify-center transition-all duration-300
+                       ${isHovered ? "scale-110 z-30" : "scale-100 opacity-90 hover:scale-105 z-10"}
                        ${pos.btn}`}
-                    >
-                        <span>{organ.name}</span>
-                        <span className="text-[10px] mt-0.5 opacity-90">{organ.percentage}% تأثر</span>
-                    </button>
+                     >
+                        <div className={`relative flex items-center justify-center w-14 h-14 mb-1 transition-all duration-300
+                            ${isHovered ? "text-blue-600 drop-shadow-[0_0_12px_rgba(37,99,235,0.7)]" : "text-[#475569] drop-shadow-md hover:text-blue-500"}`}
+                        >
+                            {(!hasError) ? (
+                                <img 
+                                   src={getOrganImage(organ.id)} 
+                                   alt={organ.name} 
+                                   className="w-full h-full object-contain drop-shadow-sm" 
+                                   onError={() => setImgError(prev => ({...prev, [organ.id]: true}))} 
+                                />
+                            ) : (
+                                OrganIcon && <OrganIcon className="w-full h-full drop-shadow-sm" />
+                            )}
+                        </div>
+                        <div className={`flex flex-col items-center justify-center backdrop-blur-md rounded-lg px-2 py-0.5 transition-all outline outline-1 outline-white/60 duration-300 shadow-xs
+                            ${isHovered ? "bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-[0_0_10px_rgba(37,99,235,0.4)] border-none font-bold" : "bg-white/90 text-blue-900 border border-blue-100 font-bold"}`}
+                        >
+                            <span className="text-[11px] whitespace-nowrap">{organ.name}</span>
+                            <span className="text-[10px] mt-0.5 opacity-90">{organ.percentage}% تأثر</span>
+                        </div>
+                     </button>
                  );
              })}
           </div>
