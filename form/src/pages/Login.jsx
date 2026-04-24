@@ -48,7 +48,7 @@ function Login() {
     if (Object.keys(err).length === 0) {
       const emailLower = values.email.trim().toLowerCase();
       if (
-        (emailLower === "dr.hany@gmail.com" || emailLower === "abzoo@gmail.com") &&
+        (emailLower === "dr.hany@gmail.com" || emailLower === "abzoo@gmail.com"||emailLower === "shahd@gmail.com") &&
         values.password === "123456"
       ) {
         navigate("/step1");
