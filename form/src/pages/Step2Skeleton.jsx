@@ -110,6 +110,7 @@ const ORGAN_IMAGE_SRC = {
   colon: "/icons8-colon-100.png",
   pancreas: "/icons8-pancreas-64.png",
   esophagus: "/icons8-anatomy-48.png",
+  rectum: "/rectum_icon.png",
 };
 
 function getOrganImage(organId) {
@@ -230,7 +231,7 @@ function Step2Skeleton() {
                         {!imgError["small_intestine"] ? <img src={getOrganImage("small_intestine")} className="w-full h-full object-contain" /> : <OrganIcons.small_intestine className="w-full h-full" />}
                     </div>
                     <div className={`absolute bottom-[10%] left-1/2 -translate-x-[50%] w-10 h-12 text-purple-500 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)] transition-all duration-300 ${hoveredOrgan?.id === "rectum" ? "opacity-100 scale-110" : "opacity-0"}`}>
-                        {!imgError["rectum"] ? <img src={getOrganImage("rectum")} className="w-full h-full object-contain" /> : <OrganIcons.rectum className="w-full h-full" />}
+                        {!imgError["rectum"] ? <img src={getOrganImage("rectum")} className="w-full h-full object-contain mix-blend-multiply" /> : <OrganIcons.rectum className="w-full h-full" />}
                     </div>
                 </div>
 
@@ -260,7 +261,7 @@ function Step2Skeleton() {
                                 <img 
                                    src={getOrganImage(organ.id)} 
                                    alt={organ.name} 
-                                   className="w-full h-full object-contain drop-shadow-sm" 
+                                   className={`w-full h-full object-contain drop-shadow-sm ${organ.id === 'rectum' ? 'mix-blend-multiply' : ''}`} 
                                    onError={() => setImgError(prev => ({...prev, [organ.id]: true}))} 
                                 />
                             ) : (
