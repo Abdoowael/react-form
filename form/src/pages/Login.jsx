@@ -7,13 +7,13 @@ import { useGoogleLogin } from '@react-oauth/google';
 function Login() {
   const navigate = useNavigate();
 
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => {
-      console.log('Google Sign-In Success:', codeResponse);
-      navigate("/step1");
-    },
-    onError: (error) => console.log('Google Sign-In Error:', error)
-  });
+  // const login = useGoogleLogin({
+  //   onSuccess: (codeResponse) => {
+  //     console.log('Google Sign-In Success:', codeResponse);
+  //     navigate("/step1");
+  //   },
+  //   onError: (error) => console.log('Google Sign-In Error:', error)
+  // });
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -44,11 +44,20 @@ function Login() {
     e.preventDefault();
 
     const err = validate();
-    setErrors(err);
 
     if (Object.keys(err).length === 0) {
-      navigate("/step1");
+      const emailLower = values.email.trim().toLowerCase();
+      if (
+        (emailLower === "dr.hany@gmail.com" || emailLower === "abzoo@gmail.com") &&
+        values.password === "123456"
+      ) {
+        navigate("/step1");
+      } else {
+        err.email = "البريد الإلكتروني أو كلمة المرور غير صحيحة";
+      }
     }
+    
+    setErrors(err);
   };
 
   return (
@@ -140,7 +149,7 @@ function Login() {
 
           <button
             type="button"
-            onClick={() => login()}
+            // onClick={() => login()}
             className="w-full border rounded-full py-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition"
           >
             <img
